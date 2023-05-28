@@ -375,16 +375,17 @@ class Administrator extends CI_Controller
             if ($to == 0) {
                 $data = $this->db->get('subscriber');
                 foreach ($data->result_array() as $d) {
+                    $this->load->library('email');
                     $config['charset'] = 'utf-8';
-                    $config['useragent'] = 'RN STORE';
-                    $config['smtp_crypto'] = 'ssl';
+                    $config['useragent'] = $this->Settings_model->general()["app_name"];
+                    $config['smtp_crypto'] = $this->Settings_model->general()["crypto_smtp"];
                     $config['protocol'] = 'smtp';
                     $config['mailtype'] = 'html';
-                    $config['smtp_host'] = 'smtp.gmail.com';
-                    $config['smtp_port'] = '465';
+                    $config['smtp_host'] = $this->Settings_model->general()["host_mail"];
+                    $config['smtp_port'] = $this->Settings_model->general()["port_mail"];
                     $config['smtp_timeout'] = '5';
-                    $config['smtp_user'] = 'widyaputri.020601@gmail.com';
-                    $config['smtp_pass'] = 'abdulmanan';
+                    $config['smtp_user'] = $this->Settings_model->general()["account_gmail"];
+                    $config['smtp_pass'] = $this->Settings_model->general()["pass_gmail"];
                     $config['crlf'] = "\r\n";
                     $config['newline'] = "\r\n";
                     $config['wordwrap'] = TRUE;
@@ -392,7 +393,7 @@ class Administrator extends CI_Controller
                     $message .= '<br/><br/><a href="' . base_url() . 'unsubscribe-email?email=' . $d['email'] . '&code=' . $d['code'] . '">Berhenti berlangganan</a>';
 
                     $this->email->initialize($config);
-                    $this->email->from('widyaputri.020601@gmail.com', 'RN STORE');
+                    $this->email->from($this->Settings_model->general()["account_gmail"], $this->Settings_model->general()["app_name"]);
                     $this->email->to($d['email']);
                     $this->email->subject($subjet);
                     $this->email->message(nl2br($message));
@@ -401,15 +402,15 @@ class Administrator extends CI_Controller
             } else {
                 $this->load->library('email');
                 $config['charset'] = 'utf-8';
-                $config['useragent'] = 'RN STORE';
-                $config['smtp_crypto'] = 'ssl';
+                $config['useragent'] = $this->Settings_model->general()["app_name"];
+                $config['smtp_crypto'] = $this->Settings_model->general()["crypto_smtp"];
                 $config['protocol'] = 'smtp';
                 $config['mailtype'] = 'html';
-                $config['smtp_host'] = 'smtp.gmail.com';
-                $config['smtp_port'] = '465';
+                $config['smtp_host'] = $this->Settings_model->general()["host_mail"];
+                $config['smtp_port'] = $this->Settings_model->general()["port_mail"];
                 $config['smtp_timeout'] = '5';
-                $config['smtp_user'] = 'widyaputri.020601@gmail.com';
-                $config['smtp_pass'] = 'abdulmanan';
+                $config['smtp_user'] = $this->Settings_model->general()["account_gmail"];
+                $config['smtp_pass'] = $this->Settings_model->general()["pass_gmail"];
                 $config['crlf'] = "\r\n";
                 $config['newline'] = "\r\n";
                 $config['wordwrap'] = TRUE;
@@ -417,7 +418,7 @@ class Administrator extends CI_Controller
                 $dataEmail = $this->db->get_where('subscriber', ['id' => $to])->row_array();
                 $message .= '<br/><br/><a href="' . base_url() . 'unsubscribe-email?email=' . $dataEmail['email'] . '&code=' . $dataEmail['code'] . '">Berhenti berlangganan</a>';
                 $this->email->initialize($config);
-                $this->email->from('widyaputri.020601@gmail.com', 'RN STORE');
+                $this->email->from($this->Settings_model->general()["account_gmail"], $this->Settings_model->general()["app_name"]);
                 $this->email->to($dataEmail['email']);
                 $this->email->subject($subjet);
                 $this->email->message(nl2br($message));
@@ -773,6 +774,19 @@ class Administrator extends CI_Controller
                 }
             }
         }
+    }
+
+    public function delete_grosir($id, $idp)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('grosir');
+        $this->session->set_flashdata('upload', "<script>
+        swal({
+        text: 'Harga grosir berhasil dihapus',
+        icon: 'success'
+        });
+        </script>");
+        redirect(base_url() . 'administrator/product/grosir/' . $idp);
     }
 
     public function delete_img_other_product($id, $idp)
