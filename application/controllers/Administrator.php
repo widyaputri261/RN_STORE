@@ -248,11 +248,11 @@ class Administrator extends CI_Controller
         $this->load->library('email');
         $config['charset'] = 'utf-8';
         $config['useragent'] = $this->Settings_model->general()["app_name"];
-        $config['smtp_crypto'] = $this->Settings_model->general()["crypto_smtp"];
+        $config['smtp_crypto'] = 'ssl';
         $config['protocol'] = 'smtp';
         $config['mailtype'] = 'html';
-        $config['smtp_host'] = $this->Settings_model->general()["host_mail"];
-        $config['smtp_port'] = $this->Settings_model->general()["port_mail"];
+        $config['smtp_host'] = 'smtp.gmail.com';
+        $config['smtp_port'] = 465;
         $config['smtp_timeout'] = '5';
         $config['smtp_user'] = $this->Settings_model->general()["account_gmail"];
         $config['smtp_pass'] = $this->Settings_model->general()["pass_gmail"];
@@ -289,11 +289,11 @@ class Administrator extends CI_Controller
         $this->load->library('email');
         $config['charset'] = 'utf-8';
         $config['useragent'] = $this->Settings_model->general()["app_name"];
-        $config['smtp_crypto'] = $this->Settings_model->general()["crypto_smtp"];
+        $config['smtp_crypto'] = 'ssl';
         $config['protocol'] = 'smtp';
         $config['mailtype'] = 'html';
-        $config['smtp_host'] = $this->Settings_model->general()["host_mail"];
-        $config['smtp_port'] = $this->Settings_model->general()["port_mail"];
+        $config['smtp_host'] = 'smtp.gmail.com';
+        $config['smtp_port'] = 465;
         $config['smtp_timeout'] = '5';
         $config['smtp_user'] = $this->Settings_model->general()["account_gmail"];
         $config['smtp_pass'] = $this->Settings_model->general()["pass_gmail"];
@@ -378,11 +378,11 @@ class Administrator extends CI_Controller
                     $this->load->library('email');
                     $config['charset'] = 'utf-8';
                     $config['useragent'] = $this->Settings_model->general()["app_name"];
-                    $config['smtp_crypto'] = $this->Settings_model->general()["crypto_smtp"];
+                    $config['smtp_crypto'] = 'ssl';
                     $config['protocol'] = 'smtp';
                     $config['mailtype'] = 'html';
-                    $config['smtp_host'] = $this->Settings_model->general()["host_mail"];
-                    $config['smtp_port'] = $this->Settings_model->general()["port_mail"];
+                    $config['smtp_host'] = 'smtp.gmail.com';
+                    $config['smtp_port'] = 465;
                     $config['smtp_timeout'] = '5';
                     $config['smtp_user'] = $this->Settings_model->general()["account_gmail"];
                     $config['smtp_pass'] = $this->Settings_model->general()["pass_gmail"];
@@ -403,11 +403,11 @@ class Administrator extends CI_Controller
                 $this->load->library('email');
                 $config['charset'] = 'utf-8';
                 $config['useragent'] = $this->Settings_model->general()["app_name"];
-                $config['smtp_crypto'] = $this->Settings_model->general()["crypto_smtp"];
+                $config['smtp_crypto'] = 'ssl';
                 $config['protocol'] = 'smtp';
                 $config['mailtype'] = 'html';
-                $config['smtp_host'] = $this->Settings_model->general()["host_mail"];
-                $config['smtp_port'] = $this->Settings_model->general()["port_mail"];
+                $config['smtp_host'] = 'smtp.gmail.com';
+                $config['smtp_port'] = 465;
                 $config['smtp_timeout'] = '5';
                 $config['smtp_user'] = $this->Settings_model->general()["account_gmail"];
                 $config['smtp_pass'] = $this->Settings_model->general()["pass_gmail"];
@@ -636,11 +636,11 @@ class Administrator extends CI_Controller
                         $this->load->library('email');
                         $config['charset'] = 'utf-8';
                         $config['useragent'] = $this->Settings_model->general()["app_name"];
-                        $config['smtp_crypto'] = $this->Settings_model->general()["crypto_smtp"];
+                        $config['smtp_crypto'] = 'ssl';
                         $config['protocol'] = 'smtp';
                         $config['mailtype'] = 'html';
-                        $config['smtp_host'] = $this->Settings_model->general()["host_mail"];
-                        $config['smtp_port'] = $this->Settings_model->general()["port_mail"];
+                        $config['smtp_host'] = 'smtp.gmail.com';
+                        $config['smtp_port'] = 465;
                         $config['smtp_timeout'] = '5';
                         $config['smtp_user'] = $this->Settings_model->general()["account_gmail"];
                         $config['smtp_pass'] = $this->Settings_model->general()["pass_gmail"];
@@ -2095,7 +2095,7 @@ class Administrator extends CI_Controller
 
             if ($upload['result'] == 'success') {
                 $this->Fotografi_model->insertPaket($upload);
-                
+
                 $this->session->set_flashdata('upload', "<script>
                     swal({
                     text: 'Paket berhasil ditambahkan',
