@@ -56,7 +56,7 @@
 				</div>
 				<div class="form-group">
 					<label for="description">Deskripsi</label>
-					<textarea class="form-control" id="description" name="description" rows="7" required><?= $paket['description']; ?></textarea>
+					<textarea class="form-control" id="description" name="description" rows="7"><?= $paket['description']; ?></textarea>
 				</div>
 				<button type="submit" class="btn btn-primary">Edit Paket</button>
 			</form>
