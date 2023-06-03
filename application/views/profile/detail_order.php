@@ -99,7 +99,7 @@ if ($err) {
                     <td><?= $ord['invoice_code']; ?></td>
                 </tr>
                 <tr>
-                    <td>Order ID</td>
+                    <td>Tanggal Pesanan</td>
                     <td><?= $ord['date_input']; ?></td>
                 </tr>
                 <tr>

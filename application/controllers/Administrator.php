@@ -49,6 +49,8 @@ class Administrator extends CI_Controller
         $data['stok'] = $this->Grafik_model->statistik_stok();
         $data['jual'] = $this->Grafik_model->statistik_jual();
         $data['pesan'] = $this->Grafik_model->statistik_pesan();
+        $data['terlaris'] = $this->Grafik_model->produk_terlaris();
+
         $this->load->view('templates/header_admin', $data);
         $this->load->view('administrator/index', $data);
         $this->load->view('templates/footer_admin');

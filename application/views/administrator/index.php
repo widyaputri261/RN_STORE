@@ -218,6 +218,13 @@
             </div>
         </div>
     </div>
+            <div class="card shadow">
+                <div class="card-header">
+                    Grafik Produk Terlaris
+                </div>
+                <canvas id="produkTerlaris"></canvas>
+        </div>
+        
     
 
 
@@ -311,6 +318,37 @@
                     if (count($pesan) > 0) {
                         foreach ($pesan as $data) {
                             echo $data->total . ", ";
+                        }
+                    }
+                    ?>
+                ]
+            }]
+        },
+    });
+</script>
+<script type="text/javascript">
+    var ctx1 = document.getElementById('produkTerlaris').getContext('2d');
+    var chart1 = new Chart(ctx1, {
+        type: 'bar',
+        data: {
+            labels: [
+                <?php
+                if (count($terlaris) > 0) {
+                    foreach ($terlaris as $data) {
+                        echo "'" . $data->title . "',";
+                    }
+                }
+                ?>
+            ],
+            datasets: [{
+                label: 'Jumlah Produk Terjual',
+                backgroundColor: '#00BFFF',
+                borderColor: '#93C3D2',
+                data: [
+                    <?php
+                    if (count($terlaris) > 0) {
+                        foreach ($terlaris as $data) {
+                            echo $data->transaction . ", ";
                         }
                     }
                     ?>

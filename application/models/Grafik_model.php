@@ -30,6 +30,16 @@ class Grafik_model extends CI_Model
         $this->db->group_by("date_input");
         return $this->db->get("order_paket")->result();
     }
+
+    function produk_terlaris()
+    {
+        $this->db->select("title, transaction");
+        // $this->db->where('transaction != 0');
+        $this->db->order_by("products.transaction", "desc");
+        $this->db->group_by("title");
+        return $this->db->get("products")->result();
+    }
+
 }
 
 /* End of file Grafik_model.php */
