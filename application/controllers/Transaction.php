@@ -74,4 +74,5 @@ class Transaction extends CI_Controller {
             </div>");
         redirect(base_url() . 'administrator/orders');
 	}
+	
 }

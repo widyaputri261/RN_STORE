@@ -111,10 +111,14 @@ if ($err) {
                             <td>Belum dibayar</td>
                         <?php } else if ($ord['pay_status'] == 'settlement' && $ord['status'] == 0) { ?>
                             <td>Menunggu Konfirmasi</td>
+                        <?php } else if ($ord['status'] == 1) { ?>
+                            <td>Telah dikonfirmasi</td>
                         <?php } else if ($ord['status'] == 2) { ?>
                             <td>Sedang diproses</td>
                         <?php } else if ($ord['status'] == 3) { ?>
                             <td>Sedang dikirim</td>
+                        <?php } else if ($ord['pay_status'] == 'expire') { ?>
+                            <td>Pesanan Kadaluwarsa</td>
                         <?php } else { ?>
                             <td>Selesai</td>
                         <?php } ?>
@@ -199,6 +203,11 @@ if ($err) {
                     $sedpros = 0;
                     $dalpen = 0;
                     $satuj = 0;
+                } else if ($ord['status'] == 1) {
+                    $pay_stat = 100;
+                    $sedpros = 0;
+                    $dalpen = 0;
+                    $satuj = 0;
                 } else if ($ord['status'] == 2) {
                     $pay_stat = 100;
                     $sedpros = 100;
@@ -277,12 +286,12 @@ if ($err) {
                         console.log(result);
                         $("#payment-form").submit();
                     },
-                    onPending: function(result){
+                    onPending: function(result) {
                         changeResult('pending', result);
                         console.log(result.status_message);
                         $("#payment-form").submit();
                     },
-                    onError: function(result){
+                    onError: function(result) {
                         changeResult('error', result);
                         console.log(result.status_message);
                         $("#payment-form").submit();

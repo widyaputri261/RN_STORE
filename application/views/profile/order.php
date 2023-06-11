@@ -25,10 +25,14 @@
                                 <td>Belum dibayar</td>
                             <?php } else if ($d['status'] == 0 && $d['pay_status'] == 'settlement') { ?>
                                 <td>Menunggu Konfirmasi</td>
+                            <?php } else if ($d['status'] == 1) { ?>
+                                <td>Telah dikonfirmasi</td>
                             <?php } else if ($d['status'] == 2) { ?>
                                 <td>Sedang diproses</td>
                             <?php } else if ($d['status'] == 3) { ?>
                                 <td>Sedang dikirim</td>
+                            <?php } else if ($d['pay_status'] == 'expire') { ?>
+                                <td>Pesanan Kadaluwarsa</td>
                             <?php } ?>
                         <?php } ?>
                         <td><small><a href="<?= base_url(); ?>profile/transaction/<?= $d['invoice_code']; ?>" class="text-info">Detail</a></small></td>

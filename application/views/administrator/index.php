@@ -86,7 +86,7 @@
                             <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. <?= number_format($penjualan['total_price'], 0) ?></div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            <img src="assets/images/background/icon_rp.jpg" width="25px">
                         </div>
                     </div>
                 </div>
@@ -102,7 +102,7 @@
                             <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. <?= number_format($pemesanan['total'], 0) ?></div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            <img src="assets/images/background/icon_rp.jpg" width="25px">
                         </div>
                     </div>
                 </div>
@@ -118,7 +118,7 @@
                             <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. <?= number_format($pembelian['total'], 0) ?></div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            <img src="assets/images/background/icon_rp.jpg" width="25px">
                         </div>
                     </div>
                 </div>
@@ -135,7 +135,7 @@
                             <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. <?= number_format($pengeluaran['price'], 0) ?></div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            <img src="assets/images/background/icon_rp.jpg" width="25px">
                         </div>
                     </div>
                 </div>
@@ -176,7 +176,7 @@
                                     <?php } else if ($d['pay_status'] == 'failure') { ?>
                                         <td><span class="status-failure">gagal</span></td>
                                     <?php } else { ?>
-                                        <td><span class="status-expired">Belum Dibayar</span></td>
+                                        <td><span class="status-pending">Belum Dibayar</span></td>
                                     <?php } ?>
                                 </tr>
                             <?php endforeach; ?>
@@ -218,14 +218,14 @@
             </div>
         </div>
     </div>
-            <div class="card shadow">
-                <div class="card-header">
-                    Grafik Produk Terlaris
-                </div>
-                <canvas id="produkTerlaris"></canvas>
+    <div class="card shadow">
+        <div class="card-header">
+            Grafik Produk Terlaris
         </div>
-        
-    
+        <canvas id="produkTerlaris"></canvas>
+    </div>
+
+
 
 
 
