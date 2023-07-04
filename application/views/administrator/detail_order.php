@@ -74,6 +74,18 @@ if ($err) {
         <?php } else { ?>
             <p class="lead">Belum dibayar</p>
         <?php } ?>
+    <?php } else if ($invoice['status'] == 1) { ?>
+        <?php if ($invoice['pay_status'] == 'pending') { ?>
+            <p class="lead">Belum dibayar</p>
+        <?php } else if ($invoice['pay_status'] == 'settlement') { ?>
+            <p class="lead text-success">Sudah dibayar</p>
+        <?php } else if ($invoice['pay_status'] == 'cancel') { ?>
+            <p class="lead text-danger">Dibatalkan</p>
+        <?php } else if ($invoice['pay_status'] == 'failure') { ?>
+            <p class="lead text-danger">Gagal</p>
+        <?php } else { ?>
+            <p class="lead">Belum dibayar</p>
+        <?php } ?>
     <?php } ?>
 
     <!-- DataTales Example -->
@@ -225,8 +237,14 @@ if ($err) {
                 <?php if ($invoice['status'] != 4) { ?>
                     <a href="<?= base_url(); ?>administrator/finish_order_cod/<?= $invoice['invoice_code']; ?>" onclick="return confirm('Yakin pesanan ini sudah selesai?');" class="btn btn-success btn-sm">Selesai</a>
                 <?php } ?>
+            <?php } else if ($invoice['courier'] == "antar") { ?>
+                <?php if ($invoice['pay_status'] == 'settlement' && $invoice['status'] == 1) { ?>
+                    <a href="<?= base_url(); ?>administrator/order/<?= $invoice['invoice_code']; ?>/process" onclick="return confirm('Yakin ingin mengubah status pesanan menjadi sedang di proses?');" class="btn btn-info btn-sm">Proses Pesanan</a>
+                <?php } else if ($invoice['status'] == 2) { ?>
+                    <a href="<?= base_url(); ?>administrator/order/<?= $invoice['invoice_code']; ?>/sending_antar" onclick="return confirm('Yakin ingin mengubah status pesanan menjadi di kirim? Pastikan anda telah mengirim pesanan ini');" class="btn btn-success btn-sm">Pesanan Dikirim</a>
+                <?php } ?>
             <?php } else { ?>
-                <?php if ($invoice['pay_status'] == 'settlement' && $invoice['status'] == 0) { ?>
+                <?php if ($invoice['pay_status'] == 'settlement' && $invoice['status'] == 1) { ?>
                     <a href="<?= base_url(); ?>administrator/order/<?= $invoice['invoice_code']; ?>/process" onclick="return confirm('Yakin ingin mengubah status pesanan menjadi sedang di proses?');" class="btn btn-info btn-sm">Proses Pesanan</a>
                 <?php } else if ($invoice['status'] == 2) { ?>
                     <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#sendingOrder">Pesanan Dikirim</button>

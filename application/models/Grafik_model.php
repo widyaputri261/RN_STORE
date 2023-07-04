@@ -18,7 +18,7 @@ class Grafik_model extends CI_Model
     {
         $this->db->select("SUM(total_price) AS total, DATE_FORMAT(date_input,'%d %M %Y') AS date");
         $this->db->where('invoice.pay_status', 'settlement');
-        $this->db->order_by("invoice.id", "desc");
+        $this->db->order_by("invoice.date_input", "asc");
         $this->db->group_by("date_input");
         return $this->db->get("invoice")->result();
     }
@@ -26,7 +26,7 @@ class Grafik_model extends CI_Model
     function statistik_pesan()
     {
         $this->db->select("SUM(total) AS total, DATE_FORMAT(date_input,'%d %M %Y') AS date");
-        $this->db->order_by("order_paket.id", "desc");
+        $this->db->order_by("order_paket.date_input", "asc");
         $this->db->group_by("date_input");
         return $this->db->get("order_paket")->result();
     }

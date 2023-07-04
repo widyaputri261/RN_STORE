@@ -38,7 +38,9 @@ class Cart extends CI_Controller
         $data['css'] = 'cart';
         $data['responsive'] = '';
         $data['cart'] = $this->Order_model->getCartUser();
-        // $data['cart_paket'] = $this->Order_model->getCartPaketUser();
+        $data['cartStock'] = $this->Order_model->getCart();
+        $data['stock'] = $this->Order_model->getCartStock();
+
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
         $this->load->view('page/cart', $data);
@@ -75,18 +77,36 @@ class Cart extends CI_Controller
         }
         if ($check) {
             $qtyupdate = intval($check['qty']) + intval($this->input->post('qty'));
-            $data = [
-                'user' => $this->session->userdata('id'),
-                'id_product' => $result['id'],
-                'product_name' => $result['title'],
-                'price' => $price,
-                'qty' => $qtyupdate,
-                'img' => $result['img'],
-                'slug' => $result['slug'],
-                'weight' => $result['weight']
-            ];
-            $this->db->where('id', $check['id']);
-            $this->db->update('cart', $data);
+            $chekStock = $this->db->get_where('products', ['id' => $id])->row_array();
+            if ($qtyupdate > $chekStock['stock']) {
+                $this->session->set_flashdata('error', "<script>
+                swal({
+                title: 'Stok produk tidak mencukupi',
+                text: 'Kamu tidak bisa menambah jumlah barang di keranjang karena telah melebihi stok yang tersedia',
+                icon: 'warning'
+                });
+                </script>");
+            } else {
+                $data = [
+                    'user' => $this->session->userdata('id'),
+                    'id_product' => $result['id'],
+                    'product_name' => $result['title'],
+                    'price' => $price,
+                    'qty' => $qtyupdate,
+                    'stock' => $result['stock'],
+                    'img' => $result['img'],
+                    'slug' => $result['slug'],
+                    'weight' => $result['weight']
+                ];
+                $this->db->where('id', $check['id']);
+                $this->db->update('cart', $data);
+                $this->session->set_flashdata('success', "<script>
+                    swal({
+                        text: 'Berhasil ditambah ke Keranjang',
+                        icon: 'success'
+                    });
+                    </script>");
+            }
         } else {
             $data = [
                 'user' => $this->session->userdata('id'),
@@ -94,11 +114,134 @@ class Cart extends CI_Controller
                 'product_name' => $result['title'],
                 'price' => $price,
                 'qty' => $this->input->post('qty'),
+                'stock' => $result['stock'],
                 'img' => $result['img'],
                 'slug' => $result['slug'],
                 'weight' => $result['weight']
             ];
             $this->db->insert('cart', $data);
+            $this->session->set_flashdata('success', "<script>
+                swal({
+                    text: 'Berhasil ditambah ke Keranjang',
+                    icon: 'success'
+                });
+            </script>");
+        }
+    }
+
+    public function edit_qty()
+    {
+        $rowid = $this->input->post('rowid');
+        $id = $this->input->post('id');
+        $setting = $this->db->get('settings')->row_array();
+        $result = $this->db->get_where('products', ['id' => $id])->row_array();
+        $check = $this->db->get_where('cart', ['user' => $this->session->userdata('id'), 'id_product' => $result['id']])->row_array();
+        $this->db->where('product', $id);
+        $this->db->where('min <=', $check['qty'] + $this->input->post('qty'));
+        $this->db->order_by('id', 'desc');
+        $grosir = $this->db->get('grosir')->row_array();
+        if ($setting['promo'] == 1) {
+            if ($result['promo_price'] == 0) {
+                if ($grosir) {
+                    $price = $grosir['price'];
+                } else {
+                    $price = $result['price'];
+                }
+            } else {
+                $price = $result['promo_price'];
+            }
+        } else {
+            if ($grosir) {
+                $price = $grosir['price'];
+            } else {
+                $price = $result['price'];
+            }
+        }
+        $qtyupdate = intval($this->input->post('qty'));
+        $chekStock = $this->db->get_where('products', ['id' => $id])->row_array();
+        if ($qtyupdate > $chekStock['stock']) {
+            $this->session->set_flashdata('error', "<script>
+                swal({
+                title: 'Stok produk tidak mencukupi',
+                text: 'Kamu tidak bisa menambah jumlah barang di keranjang karena telah melebihi stok yang tersedia',
+                icon: 'warning'
+                });
+                </script>");
+        } else {
+            if ($setting['promo'] == 1) {
+                if ($result['promo_price'] == 0) {
+                    if ($qtyupdate >= $grosir['min']) {
+                        $data = [
+                        
+                            'price' => $grosir['price'],
+                            'qty' => $qtyupdate,
+                        ];
+                        $this->db->where('id', $rowid);
+                        $this->db->update('cart', $data);
+                        $this->session->set_flashdata('success', "<script>
+                                swal({
+                                    text: 'Berhasil ditambah ke Keranjang',
+                                    icon: 'success'
+                                });
+                                </script>");
+                    }else{
+                        $data = [
+                            'price' => $result['price'],
+                            'qty' => $qtyupdate,
+                        ];
+                        $this->db->where('id', $rowid);
+                        $this->db->update('cart', $data);
+                        $this->session->set_flashdata('success', "<script>
+                                swal({
+                                    text: 'Berhasil ditambah ke Keranjang',
+                                    icon: 'success'
+                                });
+                                </script>");
+                    }
+                } else {
+                    $data = [
+                        'price' => $result['promo_price'],
+                        'qty' => $qtyupdate,
+                    ];
+                    $this->db->where('id', $rowid);
+                    $this->db->update('cart', $data);
+                    $this->session->set_flashdata('success', "<script>
+                            swal({
+                                text: 'Berhasil ditambah ke Keranjang',
+                                icon: 'success'
+                            });
+                            </script>");
+                }
+            } else {
+                if ($qtyupdate >= $grosir['min']) {
+                    $data = [
+                    
+                        'price' => $grosir['price'],
+                        'qty' => $qtyupdate,
+                    ];
+                    $this->db->where('id', $rowid);
+                    $this->db->update('cart', $data);
+                    $this->session->set_flashdata('success', "<script>
+                            swal({
+                                text: 'Berhasil ditambah ke Keranjang',
+                                icon: 'success'
+                            });
+                            </script>");
+                }else{
+                    $data = [
+                        'price' => $result['price'],
+                        'qty' => $qtyupdate,
+                    ];
+                    $this->db->where('id', $rowid);
+                    $this->db->update('cart', $data);
+                    $this->session->set_flashdata('success', "<script>
+                            swal({
+                                text: 'Berhasil ditambah ke Keranjang',
+                                icon: 'success'
+                            });
+                            </script>");
+                }
+            }
         }
     }
 

@@ -8,6 +8,18 @@ class Order_model extends CI_Model {
         return $this->db->get_where('cart', ['user' => $id]);
     }
 
+    public function getCartStock(){
+        $id = $this->session->userdata('id');
+        $this->db->where('qty >= stock' );
+        return $this->db->get_where('cart', ['user' => $id]);
+    }
+
+    public function getCart(){
+        $id = $this->session->userdata('id');
+        $this->db->where('qty <= stock' );
+        return $this->db->get_where('cart', ['user' => $id]);
+    }
+    
     // public function getCartPaketUser(){
     //     $id = $this->session->userdata('id');
     //     return $this->db->get_where('cart_paket', ['user' => $id]);

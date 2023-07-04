@@ -194,23 +194,35 @@ class Administrator extends CI_Controller
     public function process_order($id)
     {
         $buyer = $this->db->get_where('invoice', ['invoice_code' => $id])->row_array();
-        $this->db->set('status', 2);
-        $this->db->where('invoice_code', $id);
-        $this->db->update('invoice');
         $transaction = $this->db->get_where('transaction', ['id_invoice' => $id]);
+
         foreach ($transaction->result_array() as $t) {
-            $this->db->set('transaction', 'transaction+' . $t['qty'] . '', FALSE);
-            $this->db->set('stock', 'stock-' . $t['qty'] . '', FALSE);
-            $this->db->where('slug', $t['slug']);
-            $this->db->update('products');
+            $product = $this->db->get_where('products', ['slug' => $t['slug']])->row_array();
+            if ($product['stock'] < $t['qty']) {
+                $this->session->set_flashdata('upload', "<script>
+                    swal({
+                        text: 'Stok Barang Tidak mencukupi',
+                        icon: 'warning'
+                    });
+                </script>");
+                redirect(base_url() . 'administrator/order/' . $id);
+            } else {
+                $this->db->set('status', 2);
+                $this->db->where('invoice_code', $id);
+                $this->db->update('invoice');
+                $this->db->set('transaction', 'transaction+' . $t['qty'] . '', FALSE);
+                $this->db->set('stock', 'stock-' . $t['qty'] . '', FALSE);
+                $this->db->where('slug', $t['slug']);
+                $this->db->update('products');
+                $this->session->set_flashdata('upload', "<script>
+                    swal({
+                        text: 'Status berhasil diubah menjadi Sedang Diproses',
+                        icon: 'success'
+                    });
+                </script>");
+                redirect(base_url() . 'administrator/order/' . $id);
+            }
         }
-        $this->session->set_flashdata('upload', "<script>
-            swal({
-            text: 'Status berhasil diubah menjadi Sedang Diproses',
-            icon: 'success'
-            });
-        </script>");
-        redirect(base_url() . 'administrator/order/' . $id);
     }
 
     public function finish_order_cod($id)
@@ -233,6 +245,47 @@ class Administrator extends CI_Controller
         </script>");
         redirect(base_url() . 'administrator/order/' . $id);
     }
+
+    public function sending_antar($id)
+    {
+        $buyer = $this->db->get_where('invoice', ['invoice_code' => $id])->row_array();
+        $this->db->set('status', 3);
+        $this->db->where('invoice_code', $id);
+        $this->db->update('invoice');
+        $this->load->library('email');
+        $config['charset'] = 'utf-8';
+        $config['useragent'] = $this->Settings_model->general()["app_name"];
+        $config['smtp_crypto'] = 'ssl';
+        $config['protocol'] = 'smtp';
+        $config['mailtype'] = 'html';
+        $config['smtp_host'] = 'smtp.gmail.com';
+        $config['smtp_port'] = 465;
+        $config['smtp_timeout'] = '5';
+        $config['smtp_user'] = $this->Settings_model->general()["account_gmail"];
+        $config['smtp_pass'] = $this->Settings_model->general()["pass_gmail"];
+        $config['crlf'] = "\r\n";
+        $config['newline'] = "\r\n";
+        $config['wordwrap'] = TRUE;
+
+        $this->email->initialize($config);
+        $this->email->from($this->Settings_model->general()["account_gmail"], $this->Settings_model->general()["app_name"]);
+        $this->email->to($buyer['email']);
+        $this->email->subject('Pemesanan Telah Dikirim ' . $id);
+        $this->email->message(
+            '<p><strong>Halo ' . $buyer['name'] . '</strong><br>
+            Pesananmu telah kami kirim. <br/> Melalui jasa antar penjual <br/> Jika ada pertanyaan silakan bisa menghubungi kami melalui Whatsapp' . $this->Settings_model->general()["whatsapp"] . ' atau <a href="https://wa.me/' . $this->Settings_model->general()["whatsappv2"] . '">klik disini</a>.</p>
+            '
+        );
+        $this->email->send();
+        $this->session->set_flashdata('upload', "<script>
+            swal({
+            text: 'Pesanan sedang dikirim',
+            icon: 'success'
+            });
+        </script>");
+        redirect(base_url() . 'administrator/order/' . $id);
+    }
+
 
     public function sending_order($id)
     {

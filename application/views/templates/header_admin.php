@@ -234,11 +234,12 @@ $setting = $this->db->get('settings')->row_array();
                     <i class="fas fa-fw fa-shopping-cart"></i>
                     <span>Pesanan</span> <small class="badge badge-warning"><?= $orders->num_rows() ?> new</small></a>
             </li>
-
+            <?php $this->db->where('status', 0);
+            $proof = $this->db->get('payment_proof'); ?>
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url(); ?>administrator/proof">
                     <i class="fas fa-fw fa-file"></i>
-                    <span>Bukti Pembayaran</span>
+                    <span>Bukti Pembayaran</span><small class="badge badge-warning"><?= $proof->num_rows() ?> new</small>
                 </a>
             </li>
 

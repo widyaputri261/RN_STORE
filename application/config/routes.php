@@ -39,6 +39,7 @@ $route['administrator'] = 'administrator/index';
 $route['administrator/order/(:num)'] = 'administrator/detail_order/$1';
 $route['administrator/order/(:num)/process'] = 'administrator/process_order/$1';
 $route['administrator/order/(:num)/sending'] = 'administrator/sending_order/$1';
+$route['administrator/order/(:num)/sending_antar'] = 'administrator/sending_antar/$1';
 $route['administrator/order/(:num)/delete'] = 'administrator/delete_order/$1';
 $route['administrator/products/search'] = 'administrator/search_products';
 $route['administrator/product/add'] = 'administrator/add_product';

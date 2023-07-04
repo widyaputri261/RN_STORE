@@ -119,7 +119,7 @@ class Payment_model extends CI_Model {
         $service2 = $service1[2];
         $ongkir = $service1[0];
         $kurir = $service1[1];
-        $getcart = $this->db->get_where('cart', ['user' => $this->session->userdata('id')]);
+        $getcart = $this->db->get_where('cart', ['user' => $this->session->userdata('id')], ['qty <= stock']);
         foreach ($getcart->result_array() as $key) {
             $price += (intval($key['price']) * intval($key['qty']));
         }
@@ -169,6 +169,7 @@ class Payment_model extends CI_Model {
         }
 
         $this->db->where('user', $this->session->userdata('id'));
+        $this->db->where('qty <= stock');
         $this->db->delete('cart');
         redirect(base_url() . 'profile/transaction/' . $invoice);
     }

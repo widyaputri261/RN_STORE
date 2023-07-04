@@ -1,3 +1,5 @@
+<?php echo $this->session->flashdata('success'); ?>
+<?php echo $this->session->flashdata('error'); ?>
 <div class="wrapper">
     <div class="navigation">
         <a href="<?= base_url(); ?>">Home</a>
@@ -73,14 +75,20 @@
                         <?php } else { ?>
                             <?php $priceP = $product['price']; ?>
                         <?php } ?>
-                        <td class="t">Jumlah</td>
-                        <td>
-                            <button onclick="minusProduct(<?= $priceP; ?>)">-</button>
-                            <!--
+                        <?php if ($product['stock'] == 0) { ?>
+                            <td>Jumlah</td>
+                            <td style="color: red;">Stok habis</td>
+                        <?php } else { ?>
+                            <td class="t">Jumlah</td>
+                            <td>
+                                <button onclick="minusProduct(<?= $priceP; ?>)">-</button>
+                                <!--
                         --><input disabled type="text" value="1" id="qtyProduct" class="valueJml">
-                            <!--
+                                <!--
                         --><button onclick="plusProduct(<?= $priceP; ?>, <?= $product['stock']; ?>)">+</button>
-                        </td>
+                            </td>
+                        <?php } ?>
+
                     </tr>
                     <tr>
                         <td class="t">Total</td>
@@ -89,8 +97,12 @@
                 </table>
                 <hr>
                 <?php if ($this->session->userdata('login')) { ?>
-                    <button class="btn btn-warning pl-5 pr-5" onclick="buy()">Beli</button>
-                    <button class="btn btn-primary" onclick="addCart()">Tambah ke Keranjang</button>
+                    <?php if ($product['stock'] == 0) { ?>
+                    <?php } else { ?>
+                        <button class="btn btn-warning pl-5 pr-5" onclick="buy()">Beli</button>
+                        <button class="btn btn-primary" onclick="addCart()">Tambah ke Keranjang</button>
+                    <?php } ?>
+
                 <?php } else { ?>
                     <a href="<?= base_url(); ?>login" class="btn btn-secondary">Login dulu</a>
                 <?php } ?>
@@ -213,19 +225,9 @@
             },
             success: function(data) {
                 $(".navbar-cart-inform").html(`<i class="fa fa-shopping-cart"></i> Keranjang(<?= count($this->cart->contents()) + 1; ?>)`);
-                swal({
-                        title: "Berhasil Ditambah ke Keranjang",
-                        text: `<?= $product['title']; ?>`,
-                        icon: "success",
-                        buttons: true,
-                        buttons: ["Lanjut Belanja", "Lihat Keranjang"],
-                    })
-                    .then((cart) => {
-                        if (cart) {
-                            location.href = "<?= base_url(); ?>cart"
-                        }
-                    });
-            }
+                location.href = "<?= base_url(); ?>p/<?=$product['slugP'];?>"
+            },
+
         })
     }
 

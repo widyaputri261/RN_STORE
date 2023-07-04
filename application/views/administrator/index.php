@@ -144,7 +144,7 @@
     </div>
 
     <?php $this->db->limit(5);
-    $data = $this->db->get_where('invoice', ['status' => 0]); ?>
+    $data = $this->db->get_where('invoice'); ?>
     <div class="row">
         <div class="col-md-6 mb-3">
             <div class="card shadow">

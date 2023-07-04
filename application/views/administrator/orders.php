@@ -85,6 +85,8 @@
 										<?php } ?>
 										<?php if ($data['pay_status'] == 'pending') { ?>
 											<td>Belum dibayar</td>
+										<?php } else if ($data['pay_status'] == '') { ?>
+											<td>Belum dibayar</td>
 										<?php } else if ($data['pay_status'] == 'settlement') { ?>
 											<td>Lunas</td>
 										<?php } else if ($data['pay_status'] == 'cancel') { ?>
