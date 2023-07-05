@@ -1,0 +1,12 @@
+ADMINISTRATOR
+https://ta-mifpolije.com/E31201146/login/admin
+
+Username: admin
+Password: admin
+
+
+PENGGUNA / KONSUMEN
+https://ta-mifpolije.com/E31201146/login
+
+Email: widyaputri.020601@gmail.com
+Password: 12345

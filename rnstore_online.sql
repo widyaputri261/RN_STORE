@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 28, 2023 at 05:50 AM
+-- Generation Time: Jul 04, 2023 at 08:51 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -58,10 +58,7 @@ CREATE TABLE `banner` (
 --
 
 INSERT INTO `banner` (`id`, `img`, `url`) VALUES
-(14, '1621434436735.jpg', 'https://kincaimedia.net/home/'),
-(15, '1621434447920.png', 'https://kincaimedia.net/home/'),
-(18, '1621435149605.jpg', 'https://kincaimedia.net/'),
-(19, '1621435158507.jpg', 'https://kincaimedia.net/');
+(20, '1686459372444.jpg', '#');
 
 -- --------------------------------------------------------
 
@@ -76,6 +73,7 @@ CREATE TABLE `cart` (
   `product_name` varchar(150) NOT NULL,
   `price` int(11) NOT NULL,
   `qty` int(11) NOT NULL,
+  `stock` int(11) NOT NULL,
   `img` varchar(30) NOT NULL,
   `slug` varchar(150) NOT NULL,
   `weight` int(11) NOT NULL,
@@ -86,8 +84,8 @@ CREATE TABLE `cart` (
 -- Dumping data for table `cart`
 --
 
-INSERT INTO `cart` (`id`, `user`, `id_product`, `product_name`, `price`, `qty`, `img`, `slug`, `weight`, `ket`) VALUES
-(61, 17, 1, 'OPPO A91 8/128GB Special Online Edition', 3699000, 1, '1586699074281.jpg', 'oppo-a91-8128gb-special-online-edition', 300, '');
+INSERT INTO `cart` (`id`, `user`, `id_product`, `product_name`, `price`, `qty`, `stock`, `img`, `slug`, `weight`, `ket`) VALUES
+(123, 17, 73, 'CD Case', 5000, 1, 9, '1685284763854.jpeg', 'cd-case', 100, '');
 
 -- --------------------------------------------------------
 
@@ -124,13 +122,6 @@ CREATE TABLE `cod` (
   `regency_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `cod`
---
-
-INSERT INTO `cod` (`id`, `regency_id`) VALUES
-(5, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -148,8 +139,9 @@ CREATE TABLE `cost_delivery` (
 --
 
 INSERT INTO `cost_delivery` (`id`, `destination`, `price`) VALUES
-(1, 177, 40000),
-(2, 105, 10000);
+(1, 243, 50000),
+(2, 369, 0),
+(4, 418, 50000);
 
 -- --------------------------------------------------------
 
@@ -169,7 +161,8 @@ CREATE TABLE `email_send` (
 --
 
 INSERT INTO `email_send` (`id`, `mail_to`, `subject`, `message`) VALUES
-(21, 27, 'fhfgh', '<p>fghfghfghf</p>');
+(42, 27, 'kunjungi kami', '<p>kunjungi kami di jahdkjhakhf</p>'),
+(44, 26, 'kunjungi kami', '<p>segera kunjungi website kami untuk mendapatkan penawaran terbaru</p>');
 
 -- --------------------------------------------------------
 
@@ -182,21 +175,6 @@ CREATE TABLE `footer` (
   `page` int(11) NOT NULL,
   `type` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `footer`
---
-
-INSERT INTO `footer` (`id`, `page`, `type`) VALUES
-(1, 1, 1),
-(2, 3, 1),
-(3, 2, 2),
-(4, 1, 1),
-(5, 4, 1),
-(6, 5, 1),
-(7, 6, 2),
-(8, 7, 2),
-(9, 8, 2);
 
 -- --------------------------------------------------------
 
@@ -218,7 +196,8 @@ CREATE TABLE `fotografer` (
 --
 
 INSERT INTO `fotografer` (`id`, `name`, `jk`, `alamat`, `no_telp`, `img`) VALUES
-(4, 'dfdf', 'Laki-Laki', 'dgdgd', '085603002867', '1676710067567.JPG');
+(4, 'Dzulkifli', 'Laki-Laki', 'Wonorejo', '081337544918', '1685255256804.png'),
+(5, 'Slamet  Dwi ', 'Laki-Laki', 'Maron Kidul', '085236067267', '1685280999641.png');
 
 -- --------------------------------------------------------
 
@@ -249,7 +228,7 @@ CREATE TABLE `general` (
 --
 
 INSERT INTO `general` (`id`, `app_name`, `slogan`, `navbar_color`, `api_rajaongkir`, `host_mail`, `port_mail`, `crypto_smtp`, `account_gmail`, `pass_gmail`, `whatsapp`, `whatsappv2`, `email_contact`, `server_api_midtrans`, `client_api_midtrans`) VALUES
-(1, 'RN STORE', 'Partner Bisnis Berkualitas', '#FF4500', '927dd3414e464d4e77e4a60a5c44bc7a', 'smtp.gmail.com ', '465', 'ssl', 'storern08@gmail.com', 'rnstore08', '082336170023', '6282336170023', 'storern08@gmail.com', 'SB-Mid-server-tUrWb5oWs1WwG95O1ufd9CyR', 'SB-Mid-client-XlgSVWepD0TuwVKz');
+(1, 'RN STORE', 'Partner Bisnis Berkualitas', '#FF4500', '927dd3414e464d4e77e4a60a5c44bc7a', 'smtp.gmail.com ', '465', 'ssl', 'storern08@gmail.com', 'vprkmjfcptcnnxuv', '082336170023', '6282336170023', 'storern08@gmail.com', 'SB-Mid-server-tUrWb5oWs1WwG95O1ufd9CyR', 'SB-Mid-client-XlgSVWepD0TuwVKz');
 
 -- --------------------------------------------------------
 
@@ -269,35 +248,69 @@ CREATE TABLE `grosir` (
 --
 
 INSERT INTO `grosir` (`id`, `min`, `price`, `product`) VALUES
-(10, 6, 17000, 70),
-(11, 6, 17000, 69),
-(12, 6, 16000, 68),
-(13, 6, 16000, 67),
-(14, 6, 16000, 66),
-(15, 6, 16000, 65),
-(16, 6, 16000, 64),
-(17, 6, 16000, 63),
-(18, 6, 16000, 62),
-(19, 6, 16000, 61),
-(20, 6, 16000, 60),
-(21, 6, 13500, 59),
-(22, 6, 13500, 58),
-(23, 6, 13500, 57),
-(24, 6, 13500, 56),
-(25, 6, 13500, 55),
-(26, 6, 13500, 54),
-(27, 6, 13500, 53),
-(28, 6, 13500, 52),
-(29, 6, 13500, 51),
-(30, 6, 16000, 50),
-(31, 6, 16000, 49),
-(32, 6, 16000, 48),
-(33, 6, 16000, 47),
-(34, 6, 16000, 46),
-(35, 6, 16000, 45),
-(36, 6, 16000, 44),
-(37, 6, 16000, 43),
-(38, 6, 16000, 42);
+(11, 6, 19000, 69),
+(13, 6, 17500, 67),
+(14, 6, 17500, 66),
+(15, 6, 17500, 65),
+(16, 6, 17500, 64),
+(17, 6, 17500, 63),
+(18, 6, 17500, 62),
+(19, 6, 17500, 61),
+(20, 6, 17500, 60),
+(21, 6, 15000, 59),
+(22, 6, 15000, 58),
+(23, 6, 15000, 57),
+(24, 6, 15000, 56),
+(25, 6, 15000, 55),
+(26, 6, 15000, 54),
+(27, 6, 15000, 53),
+(28, 6, 15000, 52),
+(29, 6, 15000, 51),
+(30, 6, 17500, 50),
+(31, 6, 17500, 49),
+(32, 6, 17500, 48),
+(33, 6, 17500, 47),
+(34, 6, 17500, 46),
+(35, 6, 17500, 45),
+(36, 6, 17500, 44),
+(37, 6, 17500, 43),
+(38, 6, 17500, 42),
+(39, 6, 63000, 74),
+(40, 10, 4000, 73),
+(41, 6, 33000, 72),
+(42, 12, 70000, 71),
+(43, 6, 17500, 68),
+(44, 6, 19000, 70),
+(45, 6, 19000, 75),
+(46, 6, 19000, 76),
+(47, 6, 19000, 78),
+(48, 6, 19000, 77),
+(49, 6, 19000, 79),
+(50, 6, 19000, 80),
+(51, 6, 19000, 81),
+(52, 6, 35000, 82),
+(53, 6, 35000, 83),
+(54, 6, 35000, 84),
+(55, 6, 35000, 85),
+(56, 6, 35000, 86),
+(58, 6, 35000, 87),
+(59, 6, 35000, 88),
+(60, 6, 35000, 89),
+(61, 6, 35000, 90),
+(62, 6, 38000, 91),
+(63, 6, 38000, 92),
+(64, 6, 38000, 93),
+(65, 6, 38000, 94),
+(66, 6, 38000, 95),
+(67, 6, 38000, 96),
+(68, 6, 38000, 97),
+(69, 6, 38000, 98),
+(70, 6, 38000, 99),
+(71, 6, 90000, 100),
+(72, 6, 90000, 101),
+(73, 6, 90000, 102),
+(74, 6, 90000, 103),
+(75, 6, 90000, 104);
 
 -- --------------------------------------------------------
 
@@ -373,8 +386,16 @@ CREATE TABLE `invoice` (
 --
 
 INSERT INTO `invoice` (`id`, `user`, `invoice_code`, `label`, `name`, `email`, `telp`, `province`, `regency`, `district`, `village`, `zipcode`, `address`, `courier`, `courier_service`, `ongkir`, `total_price`, `total_all`, `date_input`, `status`, `resi`, `pay_status`, `link_pay`) VALUES
-(69, 18, '1819328405', 'Rumah', 'Widya', 'widyaputri.pratama@gmail.com', '085252481865', 11, 369, 'Maron', 'Wonorejo', 67276, 'Dsn. gading rt 12 rw 04', 'jne', 'OKE', '17000', 40000, 57000, '2023-02-09 14:40:05', 0, '0', 'expire', ''),
-(70, 17, '1710100254', 'rumah', 'widya putri', 'widyaputri.020601@gmail.com', '085603002867', 11, 369, 'maron', 'wonorejo', 67276, 'dsn gading rt 12 rw 04 desa wonorejo', 'jne', 'OKE', '17000', 10000, 27000, '2023-05-19 10:17:34', 0, '0', 'pending', '');
+(78, 18, '1845564381', 'Rumah', 'Widya', 'widyaputri.pratama@gmail.com', '082336170023', 11, 369, 'Maron', 'Wonorejo', 67276, 'Dsn Gading RT 12 RW 04', 'antar', 'antar', '5000', 5000, 10000, '2023-06-07 15:59:41', 0, '0', 'expire', ''),
+(79, 17, '1737704910', 'Rumah', 'Amelia', 'widyaputri.020601@gmail.com', '082332511151', 11, 369, 'Maron', 'Wonorejo', 67276, 'Dsn Candi RT 06 RW 02 Desa Wonorejo', 'antar', 'antar', '5000', 5000, 10000, '2023-06-10 12:11:50', 0, '0', 'expire', ''),
+(80, 18, '1860825645', 'Rumah', 'Widya', 'widyaputri.pratama@gmail.com', '082336170023', 11, 369, 'Maron', 'Wonorejo', 67276, 'Dsn Gading RT 12 RW 04', 'antar', 'antar', '0', 5000, 5000, '2023-06-10 12:40:45', 4, '0', 'settlement', ''),
+(81, 17, '1710555353', 'Rumah', 'Amelia Putri', 'widyaputri.020601@gmail.com', '085258364716', 11, 369, 'Maron', 'Wonorejo', 67276, 'Dsn. Candi RT 06 RW 02 Desa Wonorejo', 'jne', 'CTC', '7000', 20000, 27000, '2023-06-11 11:22:33', 2, '0', 'settlement', ''),
+(82, 18, '1812792022', 'Rumah', 'Irmawati', 'widyaputri.pratama@gmail.com', '082316683706', 11, 369, 'Kraksaan', 'Alassumur Kulon', 67282, 'Dusun Krajan RT 03 RW 02 Desa Alassumur Kulon', 'antar', 'antar', '0', 45000, 45000, '2023-06-12 10:20:22', 1, '0', 'settlement', ''),
+(83, 17, '1720422093', 'Rumah', 'Widya Putri', 'widyaputri.020601@gmail.com', '082336170023', 11, 369, 'Maron', 'Wonorejo', 67276, 'Dsn Gading RT 12 RW 04', 'antar', 'antar', '0', 20000, 20000, '2023-06-13 13:34:53', 4, '0', 'settlement', ''),
+(84, 21, '2114215606', 'rumah', 'Widya', 'e31201146@student.polije.ac.id', '082336170023', 11, 369, 'Maron', 'Wonorejo', 67276, 'Dsn Gading RT 12 RW 4', 'jne', 'CTC', '42000', 291000, 333000, '2023-06-13 14:00:06', 2, '0', 'settlement', ''),
+(85, 18, '1819878549', 'Rumah', 'Irmawati', 'widyaputri.pratama@gmail.com', '085603002867', 11, 369, 'maron', 'wonorejo', 67276, 'dsn gading rt 12 rw 04', 'antar', 'antar', '0', 40000, 40000, '2023-06-18 12:35:49', 2, '0', 'settlement', ''),
+(88, 18, '1810342210', 'rumah', 'yaumisri', 'widyaputri.pratama@gmail.com', '082332511151', 11, 369, 'Maron', 'Wonorejo', 67276, 'Wonorejo', 'antar', 'antar', '0', 5000, 5000, '2023-06-24 09:53:30', 2, '0', 'settlement', ''),
+(89, 17, '1797887479', 'Rumah', 'Imron', 'widyaputri.020601@gmail.com', '085252481865', 11, 369, 'Maron', 'Wonorejo', 67276, 'Wonorejo', 'antar', 'antar', '0', 25000, 25000, '2023-06-24 12:44:39', 1, '0', 'settlement', '');
 
 -- --------------------------------------------------------
 
@@ -431,10 +452,10 @@ CREATE TABLE `order_paket` (
 --
 
 INSERT INTO `order_paket` (`id`, `invoice_code`, `nama`, `email`, `telp`, `paket`, `price`, `jenis_acara`, `lokasi`, `alamat`, `kabupaten`, `biaya_tambahan`, `date`, `time`, `total`, `jml_bayar`, `kembalian`, `date_input`, `status`) VALUES
-(14, 'MP23052500', 'Widya Putri Pratama', 'widyaputri.pratama@gmail.com', '085603002867', 'dsdsf', 50000, 'prewedding', 'Gending', 'Dsn gading rt 12 rw 04 desa wonorejo kec. maron', 'KABUPATEN PROBOLINGGO', 0, '2023-05-31', '08:00:00', 50000, 50000, 0, '2023-05-25', 0),
-(15, 'MP23052500', 'Dika Hanggara', 'widyaputri.020601@gmail.com', '0868768737663', 'fdgdfgf', 50000, 'gfhfh', 'Jl. BUNGUR 130', 'hgasdadfa', 'KABUPATEN JEMBER', 15000, '2023-06-03', '18:55:00', 65000, 70000, 5000, '2023-05-25', 0),
-(16, 'MP23052600', 'wjwjwfr', 'testvsatu@gmail.com', '45567567', 'sdfsdfsgs', 70000, 'gfhfh', 'dreferfre', 'fghfghfgjg', 'KABUPATEN PROBOLINGGO', 0, '2023-05-31', '10:35:00', 70000, 100000, 30000, '2022-10-26', 0),
-(17, 'MP23052700', 'wjwjwfr', 'testvsatu@gmail.com', '454645657', 'fdgdfgf', 50000, 'gfhfh', 'Gending', 'gending', 'KABUPATEN PROBOLINGGO', 0, '2023-06-09', '12:00:00', 50000, 50000, 0, '2023-05-27', 0);
+(19, 'MP23052800', 'Riski', 'riski12@gmail.com', '085336762591', 'paket prewedding 1', 400000, 'Prewedding', 'RN Studio', 'Dsn Gading RT 12 RW 04 Desa Wonorejo', 'KABUPATEN PROBOLINGGO', 0, '2023-06-13', '09:00:00', 400000, 400000, 0, '2023-05-28', 0),
+(20, 'MP23052500', 'Aisyah', 'aisyah.putri@gmail.com', '082332876569', 'paket prewedding 1', 400000, 'Prewedding', 'RN Studio', 'Dsn Gading RT 12 RW 04 Desa Wonorejo', 'KABUPATEN PROBOLINGGO', 0, '2023-06-09', '09:00:00', 400000, 400000, 0, '2023-05-25', 1),
+(21, 'MP23052801', 'Riski', 'riski12@gmail.com', '085336762591', 'paket wedding/album magnetic uk. 10RS', 1000000, 'Wedding', 'Wonorejo', 'Dsn Krajan Desa Wonorejo', 'KABUPATEN PROBOLINGGO', 0, '2023-06-24', '14:00:00', 1000000, 1000000, 0, '2023-05-28', 0),
+(22, 'MP23052501', 'Aisyah', 'aisyah.putri@gmail.com', '082332876569', 'paket wedding/album magnetic uk. 10RS', 1000000, 'Wedding', 'Krucil', 'Dsn Kayu Gede Desa Krucil', 'KABUPATEN PROBOLINGGO', 0, '2023-06-21', '14:00:00', 1000000, 1000000, 0, '2023-05-25', 0);
 
 -- --------------------------------------------------------
 
@@ -484,10 +505,21 @@ CREATE TABLE `paket` (
 --
 
 INSERT INTO `paket` (`id`, `title`, `price`, `img`, `description`, `date_submit`, `publish`, `slug`) VALUES
-(1, 'fdgdfgf', 50000, '1683894647574.jpg', '<p>sdfd dfgdf dfgdfgdfgdf&nbsp;</p>', '2023-05-12 19:30:47', 1, 'fdgdfgf'),
-(2, 'dsdsf', 50000, '1683894729362.png', '<p>rfd dfgdf gdfgdfgfdg fdgfg</p>', '2023-05-12 19:32:09', 1, 'dsdsf'),
-(3, 'sdfsdfsgs', 70000, '1683895092294.png', '<p>safgsd sgfsdgf sdfgshaf</p>', '2023-05-12 19:38:12', 1, 'sdfsdfsgs'),
-(4, 'jjsbfsffdgd', 50000, '1685240439832.jpeg', '<p>asdsfsd sdfsfdf</p>', '2023-05-28 09:20:39', 1, 'jjsbfsffdgd');
+(1, 'paket wedding/album magnetic uk. 10RS + video dokumentasi', 1500000, '1685281567425.JPG', '', '2023-05-12 19:30:47', 1, 'paket-weddingalbum-magnetic-uk-10rs-video-dokumentasi'),
+(2, 'paket wedding/album jumbo', 1500000, '1685281533084.JPG', '', '2023-05-12 19:32:09', 1, 'paket-weddingalbum-jumbo'),
+(3, 'paket wedding/album magnetic uk. 10RS', 1000000, '1685281500194.JPG', '', '2023-05-12 19:38:12', 1, 'paket-weddingalbum-magnetic-uk-10rs'),
+(4, 'Paket akad nikah/album mini magnetic', 500000, '1685281450258.JPG', '', '2023-05-28 09:20:39', 1, 'paket-akad-nikahalbum-mini-magnetic'),
+(5, 'Paket wedding/album jumbo +  video dokumentasi', 2000000, '1685281627936.jpg', '', '2023-05-28 20:47:07', 1, 'paket-weddingalbum-jumbo-video-dokumentasi'),
+(6, 'paket wedding/album magnetic uk. 10RS + video dokumentasi + video cinema', 2300000, '1685281665571.jpg', '', '2023-05-28 20:47:45', 1, 'paket-weddingalbum-magnetic-uk-10rs-video-dokumentasi-video-cinema'),
+(7, 'Paket wedding/album jumbo +  video dokumentasi + video cinema', 2800000, '1685281712728.JPG', '', '2023-05-28 20:48:32', 1, 'paket-weddingalbum-jumbo-video-dokumentasi-video-cinema'),
+(8, 'paket prewedding 1', 400000, '1685282544400.jpeg', '', '2023-05-28 21:02:24', 1, 'paket-prewedding-1'),
+(9, 'paket prewedding 2', 750000, '1685282565361.jpeg', '', '2023-05-28 21:02:45', 1, 'paket-prewedding-2'),
+(10, 'paket prewedding 3', 1500000, '1685282600884.jpeg', '', '2023-05-28 21:03:20', 1, 'paket-prewedding-3'),
+(11, 'Foto wisuda', 25000, '1685282758221.jpeg', '', '2023-05-28 21:05:58', 1, 'foto-wisuda'),
+(12, 'pasfoto siswa smp', 20000, '1685283030270.jpeg', '', '2023-05-28 21:10:30', 1, 'pasfoto-siswa-smp'),
+(13, 'pasfoto siswa sd', 15000, '1685283063504.jpeg', '', '2023-05-28 21:11:03', 1, 'pasfoto-siswa-sd'),
+(14, 'Pasfoto siswa paud/tk', 10000, '1685286316100.jpeg', '', '2023-05-28 22:05:16', 1, 'pasfoto-siswa-paudtk'),
+(15, 'Pasfoto siswa sma', 20000, '1685286346418.jpeg', '', '2023-05-28 22:05:46', 1, 'pasfoto-siswa-sma');
 
 -- --------------------------------------------------------
 
@@ -501,6 +533,20 @@ CREATE TABLE `payment_proof` (
   `file` varchar(30) NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `payment_proof`
+--
+
+INSERT INTO `payment_proof` (`id`, `invoice`, `file`, `status`) VALUES
+(8, '1860825645', '1686451431598.jpeg', 1),
+(9, '1710555353', '1686457593408.jpeg', 1),
+(10, '1812792022', '1686540546767.jpeg', 1),
+(11, '1720422093', '1686638193691.jpeg', 1),
+(12, '2114215606', '1686639920462.jpeg', 1),
+(13, '1819878549', '1687066715698.jpeg', 1),
+(14, '1810342210', '1687575417940.jpeg', 1),
+(15, '1797887479', '1687585655422.jpeg', 1);
 
 -- --------------------------------------------------------
 
@@ -518,6 +564,15 @@ CREATE TABLE `pembelian` (
   `total` int(11) NOT NULL,
   `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pembelian`
+--
+
+INSERT INTO `pembelian` (`id`, `product_id`, `supplier_id`, `qty`, `price_buy`, `price_sell`, `total`, `date`) VALUES
+(17, 70, 2, 5, 16000, 30000, 80000, '2023-05-28'),
+(18, 73, 4, 10, 3500, 5000, 35000, '2023-06-18'),
+(19, 73, 4, 10, 3500, 5000, 35000, '2023-06-18');
 
 -- --------------------------------------------------------
 
@@ -538,8 +593,7 @@ CREATE TABLE `pengeluaran` (
 --
 
 INSERT INTO `pengeluaran` (`id`, `title`, `price`, `date`, `ket`) VALUES
-(1, 'fddg', 5000, '2023-02-18 14:36:00', 'sdfsdf sfsd sfsdf '),
-(2, 'retrgrt', 6000, '2023-05-21 14:08:00', 'rggfdg dfgdfgdfg');
+(3, 'Pengeluaran lain-lain', 25000, '2023-05-28 14:27:00', '');
 
 -- --------------------------------------------------------
 
@@ -571,35 +625,69 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `title`, `price_buy`, `price`, `stock`, `category`, `condit`, `weight`, `img`, `description`, `date_submit`, `publish`, `slug`, `transaction`, `promo_price`, `viewer`) VALUES
-(42, 'Pigura 4 R x 3 Black Brown', 15000, 25000, 10, 2, 1, 500, '1685195712298.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 10 x 15 cm</p><p>Ukuran kaca : 18 x 35 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 20:55:12', 1, 'pigura-4-r-x-3-black-brown', 0, 0, 1),
-(43, 'Pigura 4 R x 3 Black', 15000, 25000, 10, 2, 1, 500, '1685195748003.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 10 x 15 cm</p><p>Ukuran kaca : 18 x 35 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 20:55:48', 1, 'pigura-4-r-x-3-black', 0, 0, 0),
-(44, 'Pigura 4 R x3 Brown', 15000, 25000, 10, 2, 1, 500, '1685195776222.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 10 x 15 cm</p><p>Ukuran kaca : 18 x 35 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 20:56:16', 1, 'pigura-4-r-x3-brown', 0, 0, 0),
-(45, 'Pigura 4 R x 3 Gold', 15000, 25000, 10, 2, 1, 500, '1685195826199.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 10 x 15 cm</p><p>Ukuran kaca : 18 x 35 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 20:57:06', 1, 'pigura-4-r-x-3-gold', 0, 0, 0),
-(46, 'Pigura 4 R x 3 Motif Kayu', 15000, 25000, 10, 2, 1, 500, '1685195870215.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 10 x 15 cm</p><p>Ukuran kaca : 18 x 35 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 20:57:50', 1, 'pigura-4-r-x-3-motif-kayu', 0, 0, 0),
-(47, 'Pigura 4 R x 3 Silver', 15000, 25000, 10, 2, 1, 500, '1685195895783.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 10 x 15 cm</p><p>Ukuran kaca : 18 x 35 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 20:58:15', 1, 'pigura-4-r-x-3-silver', 0, 0, 0),
-(48, 'Pigura 4 R x 3 White Gold polos', 15000, 25000, 10, 2, 1, 500, '1685195931102.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 10 x 15 cm</p><p>Ukuran kaca : 18 x 35 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 20:58:51', 1, 'pigura-4-r-x-3-white-gold-polos', 0, 0, 0),
-(49, 'Pigura 4 R x 3 White Gold Ukir', 15000, 25000, 10, 2, 1, 500, '1685195962358.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 10 x 15 cm</p><p>Ukuran kaca : 18 x 35 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 20:59:22', 1, 'pigura-4-r-x-3-white-gold-ukir', 0, 0, 0),
-(50, 'Pigura 4 R x 3 White', 15000, 25000, 10, 2, 1, 500, '1685196014301.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 10 x 15 cm</p><p>Ukuran kaca : 18 x 35 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:00:14', 1, 'pigura-4-r-x-3-white', 0, 0, 0),
-(51, 'Pigura 6 R Black Brown', 12000, 18000, 10, 2, 1, 450, '1685196052000.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 15 x 20 cm</p><p>Ukuran kaca : 20 x 25 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:00:52', 1, 'pigura-6-r-black-brown', 0, 0, 0),
-(52, 'Pigura 6 R Black', 12000, 18000, 10, 2, 1, 450, '1685196085125.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 15 x 20 cm</p><p>Ukuran kaca : 20 x 25 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:01:25', 1, 'pigura-6-r-black', 0, 0, 0),
-(53, 'Pigura 6 R Brown', 12000, 18000, 10, 2, 1, 450, '1685196119179.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 15 x 20 cm</p><p>Ukuran kaca : 20 x 25 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:01:59', 1, 'pigura-6-r-brown', 0, 0, 0),
-(54, 'Pigura 6 R Gold', 12000, 18000, 10, 2, 1, 450, '1685196247293.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 15 x 20 cm</p><p>Ukuran kaca : 20 x 25 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:04:07', 1, 'pigura-6-r-gold', 0, 0, 0),
-(55, 'Pigura 6 R Motif Kayu', 12000, 18000, 10, 2, 1, 450, '1685196287376.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 15 x 20 cm</p><p>Ukuran kaca : 20 x 25 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:04:47', 1, 'pigura-6-r-motif-kayu', 0, 0, 0),
-(56, 'Pigura 6 R Silver', 12000, 18000, 10, 2, 1, 450, '1685196357448.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 15 x 20 cm</p><p>Ukuran kaca : 20 x 25 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:05:57', 1, 'pigura-6-r-silver', 0, 0, 0),
-(57, 'Pigura 6 R White Gold Polos', 12000, 18000, 10, 2, 1, 450, '1685196401895.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 15 x 20 cm</p><p>Ukuran kaca : 20 x 25 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:06:41', 1, 'pigura-6-r-white-gold-polos', 0, 0, 0),
-(58, 'Pigura 6 R White Gold ukir', 12000, 18000, 10, 2, 1, 450, '1685196430347.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 15 x 20 cm</p><p>Ukuran kaca : 20 x 25 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:07:10', 1, 'pigura-6-r-white-gold-ukir', 0, 0, 0),
-(59, 'Pigura 6 R White', 12000, 18000, 10, 2, 1, 450, '1685196458656.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 15 x 20 cm</p><p>Ukuran kaca : 20 x 25 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:07:38', 1, 'pigura-6-r-white', 0, 0, 0),
-(60, 'Pigura 10 R Black', 15000, 25000, 10, 2, 1, 500, '1685196524799.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 20 x 25 cm</p><p>Ukuran kaca : 25 x 30 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:08:44', 1, 'pigura-10-r-black', 0, 0, 0),
-(61, 'Pigura 10 R Black Brown', 15000, 25000, 10, 2, 1, 500, '1685196575131.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 20 x 25 cm</p><p>Ukuran kaca : 25 x 30 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:09:35', 1, 'pigura-10-r-black-brown', 0, 0, 0),
-(62, 'Pigura 10 R Brown', 15000, 25000, 10, 2, 1, 500, '1685196606835.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 20 x 25 cm</p><p>Ukuran kaca : 25 x 30 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:10:06', 1, 'pigura-10-r-brown', 0, 0, 0),
-(63, 'Pigura 10 R Gold', 15000, 25000, 10, 2, 1, 500, '1685196654127.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 20 x 25 cm</p><p>Ukuran kaca : 25 x 30 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:10:54', 1, 'pigura-10-r-gold', 0, 0, 0),
-(64, 'Pigura 10 R Motif Kayu', 15000, 25000, 10, 2, 1, 500, '1685196681450.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 20 x 25 cm</p><p>Ukuran kaca : 25 x 30 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:11:21', 1, 'pigura-10-r-motif-kayu', 0, 0, 0),
-(65, 'Pigura 10 R Silver', 15000, 25000, 10, 2, 1, 500, '1685196847661.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 20 x 25 cm</p><p>Ukuran kaca : 25 x 30 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:14:07', 1, 'pigura-10-r-silver', 0, 0, 0),
-(66, 'Pigura 10 R White Gold polos', 15000, 25000, 10, 2, 1, 500, '1685196962630.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 20 x 25 cm</p><p>Ukuran kaca : 25 x 30 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:16:02', 1, 'pigura-10-r-white-gold-polos', 0, 0, 0),
-(67, 'Pigura 10 R White Gold Ukir', 15000, 25000, 10, 2, 1, 500, '1685197014128.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 20 x 25 cm</p><p>Ukuran kaca : 25 x 30 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:16:54', 1, 'pigura-10-r-white-gold-ukir', 0, 0, 0),
-(68, 'Pigura 10 R White', 15000, 25000, 10, 2, 1, 500, '1685197088437.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 20 x 25 cm</p><p>Ukuran kaca : 25 x 30 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:18:08', 1, 'pigura-10-r-white', 0, 0, 0),
-(69, 'Pigura 10 RS Black Brown', 16000, 30000, 10, 2, 1, 500, '1685197180868.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 20 x 25 cm</p><p>Ukuran kaca : 25 x 30 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:19:40', 1, 'pigura-10-rs-black-brown', 0, 0, 0),
-(70, 'Pigura 10 RS Black', 16000, 30000, 10, 2, 1, 500, '1685197211611.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 20 x 25 cm</p><p>Ukuran kaca : 25 x 30 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:20:11', 1, 'pigura-10-rs-black', 0, 0, 0);
+(42, 'Pigura 4 R x 3 Black Brown', 15000, 25000, 10, 2, 1, 1000, '1685195712298.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 10 x 15 cm</p><p>Ukuran kaca : 18 x 35 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 20:55:12', 1, 'pigura-4-r-x-3-black-brown', 0, 0, 2),
+(43, 'Pigura 4 R x 3 Black', 15000, 25000, 10, 2, 1, 1000, '1685195748003.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 10 x 15 cm</p><p>Ukuran kaca : 18 x 35 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 20:55:48', 1, 'pigura-4-r-x-3-black', 0, 0, 2),
+(44, 'Pigura 4 R x3 Brown', 15000, 25000, 10, 2, 1, 1000, '1685195776222.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 10 x 15 cm</p><p>Ukuran kaca : 18 x 35 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 20:56:16', 1, 'pigura-4-r-x3-brown', 0, 0, 1),
+(45, 'Pigura 4 R x 3 Gold', 15000, 25000, 10, 2, 1, 1000, '1685195826199.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 10 x 15 cm</p><p>Ukuran kaca : 18 x 35 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 20:57:06', 1, 'pigura-4-r-x-3-gold', 0, 0, 0),
+(46, 'Pigura 4 R x 3 Motif Kayu', 15000, 25000, 9, 2, 1, 1000, '1685195870215.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 10 x 15 cm</p><p>Ukuran kaca : 18 x 35 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 20:57:50', 1, 'pigura-4-r-x-3-motif-kayu', 0, 0, 1),
+(47, 'Pigura 4 R x 3 Silver', 15000, 25000, 10, 2, 1, 1000, '1685195895783.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 10 x 15 cm</p><p>Ukuran kaca : 18 x 35 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 20:58:15', 1, 'pigura-4-r-x-3-silver', 0, 0, 0),
+(48, 'Pigura 4 R x 3 White Gold polos', 15000, 25000, 10, 2, 1, 1000, '1685195931102.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 10 x 15 cm</p><p>Ukuran kaca : 18 x 35 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 20:58:51', 1, 'pigura-4-r-x-3-white-gold-polos', 0, 0, 0),
+(49, 'Pigura 4 R x 3 White Gold Ukir', 15000, 25000, 10, 2, 1, 1000, '1685195962358.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 10 x 15 cm</p><p>Ukuran kaca : 18 x 35 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 20:59:22', 1, 'pigura-4-r-x-3-white-gold-ukir', 0, 0, 0),
+(50, 'Pigura 4 R x 3 White', 15000, 25000, 10, 2, 1, 1000, '1685196014301.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 10 x 15 cm</p><p>Ukuran kaca : 18 x 35 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:00:14', 1, 'pigura-4-r-x-3-white', 0, 0, 0),
+(51, 'Pigura 6 R Black Brown', 13000, 20000, 10, 2, 1, 700, '1685196052000.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 15 x 20 cm</p><p>Ukuran kaca : 20 x 25 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:00:52', 1, 'pigura-6-r-black-brown', 0, 0, 0),
+(52, 'Pigura 6 R Black', 13000, 20000, 10, 2, 1, 700, '1685196085125.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 15 x 20 cm</p><p>Ukuran kaca : 20 x 25 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:01:25', 1, 'pigura-6-r-black', 0, 0, 0),
+(53, 'Pigura 6 R Brown', 13000, 20000, 10, 2, 1, 700, '1685196119179.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 15 x 20 cm</p><p>Ukuran kaca : 20 x 25 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:01:59', 1, 'pigura-6-r-brown', 0, 0, 0),
+(54, 'Pigura 6 R Gold', 13000, 20000, 10, 2, 1, 700, '1685196247293.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 15 x 20 cm</p><p>Ukuran kaca : 20 x 25 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:04:07', 1, 'pigura-6-r-gold', 0, 0, 0),
+(55, 'Pigura 6 R Motif Kayu', 13000, 20000, 10, 2, 1, 700, '1685196287376.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 15 x 20 cm</p><p>Ukuran kaca : 20 x 25 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:04:47', 1, 'pigura-6-r-motif-kayu', 0, 0, 0),
+(56, 'Pigura 6 R Silver', 13000, 20000, 10, 2, 1, 700, '1685196357448.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 15 x 20 cm</p><p>Ukuran kaca : 20 x 25 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:05:57', 1, 'pigura-6-r-silver', 0, 0, 0),
+(57, 'Pigura 6 R White Gold Polos', 13000, 20000, 10, 2, 1, 700, '1685196401895.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 15 x 20 cm</p><p>Ukuran kaca : 20 x 25 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:06:41', 1, 'pigura-6-r-white-gold-polos', 0, 0, 0),
+(58, 'Pigura 6 R White Gold ukir', 13000, 20000, 8, 2, 1, 700, '1685196430347.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 15 x 20 cm</p><p>Ukuran kaca : 20 x 25 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:07:10', 1, 'pigura-6-r-white-gold-ukir', 2, 0, 2),
+(59, 'Pigura 6 R White', 13000, 20000, 10, 2, 1, 700, '1685196458656.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 15 x 20 cm</p><p>Ukuran kaca : 20 x 25 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:07:38', 1, 'pigura-6-r-white', 0, 0, 0),
+(60, 'Pigura 10 R Black', 15000, 25000, 10, 2, 1, 1000, '1685196524799.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 20 x 25 cm</p><p>Ukuran kaca : 25 x 30 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:08:44', 1, 'pigura-10-r-black', 0, 0, 0),
+(61, 'Pigura 10 R Black Brown', 15000, 25000, 10, 2, 1, 1000, '1685196575131.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 20 x 25 cm</p><p>Ukuran kaca : 25 x 30 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:09:35', 1, 'pigura-10-r-black-brown', 0, 0, 0),
+(62, 'Pigura 10 R Brown', 15000, 25000, 10, 2, 1, 1000, '1685196606835.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 20 x 25 cm</p><p>Ukuran kaca : 25 x 30 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:10:06', 1, 'pigura-10-r-brown', 0, 0, 0),
+(63, 'Pigura 10 R Gold', 15000, 25000, 10, 2, 1, 1000, '1685196654127.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 20 x 25 cm</p><p>Ukuran kaca : 25 x 30 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:10:54', 1, 'pigura-10-r-gold', 0, 0, 0),
+(64, 'Pigura 10 R Motif Kayu', 15000, 25000, 10, 2, 1, 1000, '1685196681450.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 20 x 25 cm</p><p>Ukuran kaca : 25 x 30 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:11:21', 1, 'pigura-10-r-motif-kayu', 0, 0, 0),
+(65, 'Pigura 10 R Silver', 15000, 25000, 10, 2, 1, 1000, '1685196847661.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 20 x 25 cm</p><p>Ukuran kaca : 25 x 30 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:14:07', 1, 'pigura-10-r-silver', 0, 0, 1),
+(66, 'Pigura 10 R White Gold polos', 15000, 25000, 10, 2, 1, 1000, '1685196962630.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 20 x 25 cm</p><p>Ukuran kaca : 25 x 30 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:16:02', 1, 'pigura-10-r-white-gold-polos', 0, 0, 0),
+(67, 'Pigura 10 R White Gold Ukir', 15000, 25000, 10, 2, 1, 1000, '1685197014128.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 20 x 25 cm</p><p>Ukuran kaca : 25 x 30 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:16:54', 1, 'pigura-10-r-white-gold-ukir', 0, 0, 0),
+(68, 'Pigura 10 R White', 15000, 25000, 10, 2, 1, 1000, '1685197088437.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 20 x 25 cm</p><p>Ukuran kaca : 25 x 30 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:18:08', 1, 'pigura-10-r-white', 0, 0, 1),
+(69, 'Pigura 10 RS Black Brown', 16000, 30000, 10, 2, 1, 1000, '1685197180868.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 20 x 25 cm</p><p>Ukuran kaca : 25 x 30 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:19:40', 1, 'pigura-10-rs-black-brown', 0, 0, 0),
+(70, 'Pigura 10 RS Black', 16000, 30000, 15, 2, 1, 1000, '1685197211611.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 20 x 25 cm</p><p>Ukuran kaca : 25 x 30 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-05-27 21:20:11', 1, 'pigura-10-rs-black', 0, 0, 1),
+(71, 'Album magnetic', 65000, 75000, 9, 3, 1, 1200, '1685284667045.jpeg', '<p>Album magnetic isi 80 foto ukuran 4R atau isi 20 foto ukuran 10RS</p>', '2023-05-28 21:37:47', 1, 'album-magnetic', 1, 0, 1),
+(72, 'CD Label', 30000, 35000, 10, 6, 1, 500, '1685284719107.jpeg', '', '2023-05-28 21:38:39', 1, 'cd-label', 0, 0, 0),
+(73, 'CD Case', 3500, 5000, 9, 6, 1, 100, '1685284763854.jpeg', '', '2023-05-28 21:39:23', 1, 'cd-case', 46, 3500, 207),
+(74, 'Kertas foto silky 260 gsm', 59000, 65000, 10, 3, 1, 300, '1685284820544.jpeg', '', '2023-05-28 21:40:20', 1, 'kertas-foto-silky-260-gsm', 0, 0, 1),
+(75, 'Pigura 10 RS Brown', 16000, 30000, 10, 2, 1, 1000, '1685762823164.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 20 x 30 cm</p><p>Ukuran kaca : 25 x 35 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-06-03 10:27:03', 1, 'pigura-10-rs-brown', 0, 0, 0),
+(76, 'Pigura 10 RS Gold', 16000, 30000, 10, 2, 1, 1000, '1685763117058.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 20 x 30 cm</p><p>Ukuran kaca : 25 x 35 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-06-03 10:31:57', 1, 'pigura-10-rs-gold', 0, 0, 0),
+(77, 'Pigura 10 RS Motif Kayu', 16000, 30000, 10, 2, 1, 1000, '1685763352723.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 20 x 30 cm</p><p>Ukuran kaca : 25 x 35 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-06-03 10:35:52', 1, 'pigura-10-rs-motif-kayu', 0, 0, 0),
+(78, 'Pigura 10 RS Silver', 16000, 30000, 10, 2, 1, 1000, '1685763864801.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 20 x 30 cm</p><p>Ukuran kaca : 25 x 35 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-06-03 10:44:24', 1, 'pigura-10-rs-silver', 0, 0, 0),
+(79, 'Pigura 10 RS White Gold Polos', 16000, 30000, 10, 2, 1, 1000, '1685764045130.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 20 x 30 cm</p><p>Ukuran kaca : 25 x 35 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-06-03 10:47:25', 1, 'pigura-10-rs-white-gold-polos', 0, 0, 0),
+(80, 'Pigura 10 RS White Gold Ukir', 16000, 30000, 10, 2, 1, 1000, '1685764609589.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 20 x 30 cm</p><p>Ukuran kaca : 25 x 35 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-06-03 10:56:49', 1, 'pigura-10-rs-white-gold-ukir', 0, 0, 0),
+(81, 'Pigura 10 RS White', 16000, 30000, 10, 2, 1, 1000, '1685764655428.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 20 x 30 cm</p><p>Ukuran kaca : 25 x 35 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-06-03 10:57:35', 1, 'pigura-10-rs-white', 0, 0, 0),
+(82, 'Pigura 12 R Black', 30000, 45000, 10, 2, 1, 1800, '1685764753063.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 30 x 40 cm</p><p>Ukuran kaca : 45 x 45 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-06-03 10:59:13', 1, 'pigura-12-r-black', 0, 0, 0),
+(83, 'Pigura 12 R Black Brown', 30000, 45000, 10, 2, 1, 1800, '1685764789016.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 30 x 40 cm</p><p>Ukuran kaca : 45 x 45 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-06-03 10:59:49', 1, 'pigura-12-r-black-brown', 0, 0, 0),
+(84, 'Pigura 12 R Brown', 30000, 45000, 10, 2, 1, 1800, '1685765044146.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 30 x 40 cm</p><p>Ukuran kaca : 45 x 45 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-06-03 11:04:04', 1, 'pigura-12-r-brown', 0, 0, 0),
+(85, 'Pigura 10 R Gold', 30000, 45000, 10, 2, 1, 1800, '1685768209640.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 30 x 40 cm</p><p>Ukuran kaca : 45 x 45 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-06-03 11:56:49', 1, 'pigura-10-r-gold', 0, 0, 0),
+(86, 'Pigura 12 R Motif Kayu', 30000, 45000, 10, 2, 1, 1800, '1685768413212.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 30 x 40 cm</p><p>Ukuran kaca : 45 x 45 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-06-03 12:00:13', 1, 'pigura-12-r-motif-kayu', 0, 0, 0),
+(87, 'Pigura 10 R Silver', 30000, 45000, 10, 2, 1, 1800, '1685768463505.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 30 x 40 cm</p><p>Ukuran kaca : 45 x 45 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-06-03 12:01:03', 1, 'pigura-10-r-silver', 0, 0, 0),
+(88, 'Pigura 12 R White Gold Polos', 30000, 45000, 10, 2, 1, 1800, '1685768517442.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 30 x 40 cm</p><p>Ukuran kaca : 45 x 45 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-06-03 12:01:57', 1, 'pigura-12-r-white-gold-polos', 0, 0, 0),
+(89, 'Pigura 12 R White Gold Ukir', 30000, 45000, 10, 2, 1, 1800, '1685768566159.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 30 x 40 cm</p><p>Ukuran kaca : 45 x 45 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-06-03 12:02:46', 1, 'pigura-12-r-white-gold-ukir', 0, 0, 1),
+(90, 'Pigura 12 R White', 30000, 45000, 10, 2, 1, 1800, '1685768601009.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 30 x 40 cm</p><p>Ukuran kaca : 45 x 45 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-06-03 12:03:21', 1, 'pigura-12-r-white', 0, 0, 0),
+(91, 'Pigura 12 RS Black Brown', 32000, 50000, 10, 2, 1, 1800, '1685768755235.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 30 x 45 cm</p><p>Ukuran kaca : 45 x 50 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-06-03 12:05:55', 1, 'pigura-12-rs-black-brown', 0, 0, 0),
+(92, 'Pigura 12 RS Black', 32000, 50000, 10, 2, 1, 1800, '1685768808386.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 30 x 45 cm</p><p>Ukuran kaca : 45 x 50 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-06-03 12:06:48', 1, 'pigura-12-rs-black', 0, 0, 0),
+(93, 'Pigura 12 RS Brown', 32000, 50000, 10, 2, 1, 1800, '1685768849138.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 30 x 45 cm</p><p>Ukuran kaca : 45 x 50 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-06-03 12:07:29', 1, 'pigura-12-rs-brown', 0, 0, 0),
+(94, 'Pigura 12 RS Gold', 32000, 50000, 10, 2, 1, 1800, '1685768890926.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 30 x 45 cm</p><p>Ukuran kaca : 45 x 50 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-06-03 12:08:10', 1, 'pigura-12-rs-gold', 0, 0, 1),
+(95, 'Pigura 12 RS Motif Kayu', 32000, 50000, 10, 2, 1, 1800, '1685768934196.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 30 x 45 cm</p><p>Ukuran kaca : 45 x 50 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-06-03 12:08:54', 1, 'pigura-12-rs-motif-kayu', 0, 0, 0),
+(96, 'Pigura 12 RS Silver', 32000, 50000, 10, 2, 1, 1800, '1685768978960.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 30 x 45 cm</p><p>Ukuran kaca : 45 x 50 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-06-03 12:09:38', 1, 'pigura-12-rs-silver', 0, 0, 0),
+(97, 'Pigura 12 RS White Gold Polos', 32000, 50000, 10, 2, 1, 1800, '1685769016304.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 30 x 45 cm</p><p>Ukuran kaca : 45 x 50 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-06-03 12:10:16', 1, 'pigura-12-rs-white-gold-polos', 0, 0, 0),
+(98, 'Pigura 12 RS White Gold Ukir', 32000, 50000, 10, 2, 1, 1800, '1685769058174.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 30 x 45 cm</p><p>Ukuran kaca : 45 x 50 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-06-03 12:10:58', 1, 'pigura-12-rs-white-gold-ukir', 0, 0, 2),
+(99, 'Pigura 12 RS White', 32000, 50000, 10, 2, 1, 1800, '1685769101390.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 3cm</p><p>Ukuran : 30 x 45 cm</p><p>Ukuran kaca : 45 x 50 cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-06-03 12:11:41', 1, 'pigura-12-rs-white', 0, 0, 0),
+(100, 'Pigura 16RS Brown', 75000, 125000, 10, 2, 1, 2500, '1685769159470.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 4cm + 3cm</p><p>Ukuran : 40 x 60cm</p><p>Ukuran kaca : 40 x 60cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-06-03 12:12:39', 1, 'pigura-16rs-brown', 0, 0, 0),
+(101, 'Pigura 16 RS Brown', 75000, 125000, 10, 2, 1, 2500, '1685769202801.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 4cm + 3cm</p><p>Ukuran : 40 x 60cm</p><p>Ukuran kaca : 40 x 60cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-06-03 12:13:22', 1, 'pigura-16-rs-brown', 0, 0, 0),
+(102, 'Pigura 16 RS Gold', 75000, 125000, 10, 2, 1, 2500, '1685769255510.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 4cm + 3cm</p><p>Ukuran : 40 x 60cm</p><p>Ukuran kaca : 40 x 60cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-06-03 12:14:15', 1, 'pigura-16-rs-gold', 0, 0, 0),
+(103, 'Pigura 16 RS Silver', 75000, 125000, 10, 2, 1, 2500, '1685769291607.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 4cm + 3cm</p><p>Ukuran : 40 x 60cm</p><p>Ukuran kaca : 40 x 60cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-06-03 12:14:51', 1, 'pigura-16-rs-silver', 0, 0, 11),
+(104, 'Pigura 16 RS White', 75000, 125000, 9, 2, 1, 2500, '1685769332393.jpeg', '<p>Bahan : Fiber</p><p>Lebar : 4cm + 3cm</p><p>Ukuran : 40 x 60cm</p><p>Ukuran kaca : 40 x 60cm</p><p>Tebal kaca : 2mm</p><p>Bagian Belakang : Triplek</p><p>Tebal Triplek : 3mm</p>', '2023-06-03 12:15:32', 1, 'pigura-16-rs-white', 1, 0, 8);
 
 -- --------------------------------------------------------
 
@@ -1150,9 +1238,9 @@ CREATE TABLE `rekening` (
 --
 
 INSERT INTO `rekening` (`id`, `rekening`, `name`, `number`) VALUES
-(1, 'DANA', 'Toni Suwendi', '088215005600'),
-(3, 'GOPAY', 'Toni Suwendi', '088215005600'),
-(7, 'OVO', 'Toni Suwendi', '088215005600');
+(1, 'DANA', 'Irmawati', '082316683706'),
+(3, 'GOPAY', 'Abdul Manan', '082330515981'),
+(8, 'BRI', 'Abdul Manan', '6511010117247533');
 
 -- --------------------------------------------------------
 
@@ -1178,7 +1266,7 @@ CREATE TABLE `settings` (
 --
 
 INSERT INTO `settings` (`id`, `promo`, `promo_time`, `short_desc`, `address`, `regency_id`, `verify`, `logo`, `favicon`, `default_ongkir`) VALUES
-(1, 0, '2023-05-13T20:30', 'Toko online terlengkap dan terpercaya. Dapatkan penawaran dengan kualitas terbaik. TokoKu Laku hadir untuk memenuhi kebutuhan Anda.', 'Jl. Sumbawa, Ulak Karang Utara, Kec. Padang Utara, Kota Padang, Sumatera Barat, Indonesia', 105, 1, '1675923514961.JPG', '1675923527658.JPG', 10000);
+(1, 0, '2023-06-26T09:43', 'Toko pigura terlengkap dan terpercaya. Dapatkan penawaran dengan kualitas terbaik. RN Store hadir untuk memenuhi kebutuhan Anda.', 'Dsn. Gading RT 12 RW 04 Desa Wonorejo Kec. Maron Kab. Probolinggo Jawa Timur 67276', 369, 1, '1675923514961.JPG', '1675923527658.JPG', 20000);
 
 -- --------------------------------------------------------
 
@@ -1198,11 +1286,8 @@ CREATE TABLE `sosmed` (
 --
 
 INSERT INTO `sosmed` (`id`, `name`, `icon`, `link`) VALUES
-(1, 'Facebook', 'facebook-f', 'https://facebook.com/MyCodingXD'),
-(3, 'Twitter', 'twitter', 'https://twitter.com/MyCodingXD'),
-(5, 'Instagram', 'instagram', 'https://instagram.com/MyCodingXD'),
-(6, 'Youtube', 'youtube', 'https://youtube.com/c/MyCodingXD'),
-(7, 'Blog', 'blogger', 'https://blog.kincaimedia.net');
+(1, 'Facebook', 'facebook-f', 'https://www.facebook.com/manan.monthakendikpesseh?'),
+(5, 'Instagram', 'instagram', 'https://instagram.com/rn_pigura?igshid=MzRlODBiNWF');
 
 -- --------------------------------------------------------
 
@@ -1235,10 +1320,11 @@ CREATE TABLE `subscriber` (
 --
 
 INSERT INTO `subscriber` (`id`, `email`, `date_subs`, `code`) VALUES
-(0, 'Semua Email', '2020-04-21 13:59:23', ''),
-(21, 'member@gmail.com', '2021-05-19 22:20:52', '1621437652141395667'),
+(0, 'Semua Email', '2023-02-01 10:45:32', ''),
 (26, 'widyaputri.020601@gmail.com', '2023-02-09 14:26:13', '16759275731614198883'),
-(27, 'widyaputri.pratama@gmail.com', '2023-02-09 14:36:29', '1675928189948944172');
+(27, 'widyaputri.pratama@gmail.com', '2023-02-09 14:36:29', '1675928189948944172'),
+(30, 'e31201146@srudent.polije.ac.id', '2023-06-13 13:44:54', '16866386941418052466'),
+(31, 'e31201146@student.polije.ac.id', '2023-06-13 13:47:13', '1686638833279071015');
 
 -- --------------------------------------------------------
 
@@ -1259,8 +1345,9 @@ CREATE TABLE `supplier` (
 --
 
 INSERT INTO `supplier` (`id`, `nama`, `jk`, `no_telp`, `alamat`) VALUES
-(2, 'abdul manan', 'Laki-Laki', '085603002867', 'wonorejo'),
-(3, 'Widya putri', 'Perempuan', '909078738563534', 'jsgdfsdbfsdfs');
+(2, 'Muriyanto', 'Laki-Laki', '085252481865', 'Wonorejo'),
+(3, 'Memori Album', 'Laki-Laki', '085603002867', 'Semarang'),
+(4, 'IQ Tronic', 'Laki-Laki', '082332511151', 'Surabaya');
 
 -- --------------------------------------------------------
 
@@ -1310,10 +1397,19 @@ CREATE TABLE `transaction` (
 --
 
 INSERT INTO `transaction` (`id`, `id_invoice`, `user`, `product_name`, `price`, `qty`, `slug`, `ket`, `img`) VALUES
-(66, 1819328405, 18, 'fddfdf', 40000, 1, 'fddfdf', '', '1675925719631.jpg'),
-(67, 1743413149, 17, 'sfdsdff', 10000, 1, 'sfdsdff', '', '1683817767294.png'),
-(68, 1710100254, 17, 'sfdsdff', 10000, 1, 'sfdsdff', '', '1683817767294.png'),
-(69, 1715941390, 17, 'fdfdfdf', 50000, 1, 'fdfdfdf', '', '1683817855639.jpg');
+(76, 1858745447, 18, 'CD Case', 5000, 1, 'cd-case', '', '1685284763854.jpeg'),
+(77, 1845564381, 18, 'CD Case', 5000, 1, 'cd-case', '', '1685284763854.jpeg'),
+(78, 1737704910, 17, 'CD Case', 5000, 1, 'cd-case', '', '1685284763854.jpeg'),
+(79, 1860825645, 18, 'CD Case', 5000, 1, 'cd-case', '', '1685284763854.jpeg'),
+(80, 1710555353, 17, 'Pigura 6 R White Gold ukir', 20000, 1, 'pigura-6-r-white-gold-ukir', '', '1685196430347.jpeg'),
+(81, 1812792022, 18, 'Pigura 12 R White Gold Ukir', 45000, 1, 'pigura-12-r-white-gold-ukir', '', '1685768566159.jpeg'),
+(82, 1720422093, 17, 'Pigura 6 R White Gold ukir', 20000, 1, 'pigura-6-r-white-gold-ukir', '', '1685196430347.jpeg'),
+(83, 2114215606, 21, 'Pigura 16 RS White', 120000, 1, 'pigura-16-rs-white', '', '1685769332393.jpeg'),
+(84, 2114215606, 21, 'Album magnetic', 75000, 1, 'album-magnetic', '', '1685284667045.jpeg'),
+(85, 2114215606, 21, 'CD Case', 4000, 24, 'cd-case', '', '1685284763854.jpeg'),
+(86, 1819878549, 18, 'CD Case', 4000, 10, 'cd-case', '', '1685284763854.jpeg'),
+(90, 1810342210, 18, 'CD Case', 5000, 1, 'cd-case', '', '1685284763854.jpeg'),
+(91, 1797887479, 17, 'CD Case', 5000, 5, 'cd-case', '', '1685284763854.jpeg');
 
 -- --------------------------------------------------------
 
@@ -1342,7 +1438,9 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `name`, `username`, `email`, `password`, `date_register`, `is_activate`, `token`, `token_reset`, `cookie`, `photo_profile`) VALUES
 (12, '401XD Group', '401xd-group', 'member@gmail.com', '$2y$10$cIJ4gL/TvfCzvhlFIlS96uCB8.1erZ.4m0PCuqgthorGXqex37iNm', '2021-05-19 22:20:52', 1, 'ef68bc405b7e534fb2010ef57ca1f020cb29653f', '', 'SfhZSWn56LyY2qDH6nMocwj38JKbNcltGsQhIv9duUXBROzTG4f77xLgHAlvFWm0', 'default.png'),
 (17, 'widya', 'widya', 'widyaputri.020601@gmail.com', '$2y$10$rSa9v4BSUQizxIx3rg0z9ugkEcNVPRqUeiRm1CSzmwDrH4jV/2wVm', '2023-02-09 14:26:13', 1, 'd11bf94b7d8fc1c2fb2815f3f54d8d5c6b692791', '', '', 'default.png'),
-(18, 'putri', 'putri', 'widyaputri.pratama@gmail.com', '$2y$10$oo9APNFLTD9nYrl.CLoee.SQ7S66hj52rVpmxLnoPKYkCT7KGZ51y', '2023-02-09 14:36:29', 1, '8f6c172456bea189440b46e07ac46c7211c41e38', '', '', 'default.png');
+(18, 'putri', 'putri', 'widyaputri.pratama@gmail.com', '$2y$10$oo9APNFLTD9nYrl.CLoee.SQ7S66hj52rVpmxLnoPKYkCT7KGZ51y', '2023-02-09 14:36:29', 1, '8f6c172456bea189440b46e07ac46c7211c41e38', '', '', 'default.png'),
+(20, 'Widya Putri Pratama', 'widya-putri-pratama', 'e31201146@srudent.polije.ac.id', '$2y$10$J4zQVEvpbDUPhI608K9l1.M9NLhYHEbpUjAAbK/RPpRxDKWA9g7v.', '2023-06-13 13:44:54', 0, 'c60f0e8789670b58de99e829c0136f0ab1374a50', '', '', 'default.png'),
+(21, 'Widya ', 'widya208', 'e31201146@student.polije.ac.id', '$2y$10$c2sqLW0Im1egntWAsD2Np.WjSG4iL/RQEoHvTAjSRS.QbUqC4hNfO', '2023-06-13 13:47:13', 1, '089fe39aa2e494ce777cb5aadcca93115749c939', '', '', 'default.png');
 
 --
 -- Indexes for dumped tables
@@ -1556,13 +1654,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `banner`
 --
 ALTER TABLE `banner`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -1574,19 +1672,19 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `cod`
 --
 ALTER TABLE `cod`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `cost_delivery`
 --
 ALTER TABLE `cost_delivery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `email_send`
 --
 ALTER TABLE `email_send`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `footer`
@@ -1598,7 +1696,7 @@ ALTER TABLE `footer`
 -- AUTO_INCREMENT for table `fotografer`
 --
 ALTER TABLE `fotografer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `general`
@@ -1610,7 +1708,7 @@ ALTER TABLE `general`
 -- AUTO_INCREMENT for table `grosir`
 --
 ALTER TABLE `grosir`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT for table `img_paket`
@@ -1622,13 +1720,13 @@ ALTER TABLE `img_paket`
 -- AUTO_INCREMENT for table `img_product`
 --
 ALTER TABLE `img_product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `invoice`
 --
 ALTER TABLE `invoice`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 
 --
 -- AUTO_INCREMENT for table `menu`
@@ -1640,7 +1738,7 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT for table `order_paket`
 --
 ALTER TABLE `order_paket`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `pages`
@@ -1652,37 +1750,37 @@ ALTER TABLE `pages`
 -- AUTO_INCREMENT for table `paket`
 --
 ALTER TABLE `paket`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `payment_proof`
 --
 ALTER TABLE `payment_proof`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `pembelian`
 --
 ALTER TABLE `pembelian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `pengeluaran`
 --
 ALTER TABLE `pengeluaran`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
 --
 -- AUTO_INCREMENT for table `rekening`
 --
 ALTER TABLE `rekening`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `settings`
@@ -1706,13 +1804,13 @@ ALTER TABLE `submenu`
 -- AUTO_INCREMENT for table `subscriber`
 --
 ALTER TABLE `subscriber`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `supplier`
 --
 ALTER TABLE `supplier`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `testimonial`
@@ -1724,13 +1822,13 @@ ALTER TABLE `testimonial`
 -- AUTO_INCREMENT for table `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Constraints for dumped tables
@@ -1742,12 +1840,6 @@ ALTER TABLE `user`
 ALTER TABLE `pembelian`
   ADD CONSTRAINT `pembelian_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `pembelian_ibfk_2` FOREIGN KEY (`supplier_id`) REFERENCES `supplier` (`id`) ON UPDATE CASCADE;
-
---
--- Constraints for table `regencies`
---
-ALTER TABLE `regencies`
-  ADD CONSTRAINT `regencies_province_id_foreign` FOREIGN KEY (`province_id`) REFERENCES `provinces` (`id`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

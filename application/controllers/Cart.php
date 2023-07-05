@@ -136,28 +136,12 @@ class Cart extends CI_Controller
         $setting = $this->db->get('settings')->row_array();
         $result = $this->db->get_where('products', ['id' => $id])->row_array();
         $check = $this->db->get_where('cart', ['user' => $this->session->userdata('id'), 'id_product' => $result['id']])->row_array();
+        $qtyupdate = intval($this->input->post('qty'));
         $this->db->where('product', $id);
-        $this->db->where('min <=', $check['qty'] + $this->input->post('qty'));
+        $this->db->where('min <=', $qtyupdate);
         $this->db->order_by('id', 'desc');
         $grosir = $this->db->get('grosir')->row_array();
-        if ($setting['promo'] == 1) {
-            if ($result['promo_price'] == 0) {
-                if ($grosir) {
-                    $price = $grosir['price'];
-                } else {
-                    $price = $result['price'];
-                }
-            } else {
-                $price = $result['promo_price'];
-            }
-        } else {
-            if ($grosir) {
-                $price = $grosir['price'];
-            } else {
-                $price = $result['price'];
-            }
-        }
-        $qtyupdate = intval($this->input->post('qty'));
+        
         $chekStock = $this->db->get_where('products', ['id' => $id])->row_array();
         if ($qtyupdate > $chekStock['stock']) {
             $this->session->set_flashdata('error', "<script>
@@ -170,7 +154,7 @@ class Cart extends CI_Controller
         } else {
             if ($setting['promo'] == 1) {
                 if ($result['promo_price'] == 0) {
-                    if ($qtyupdate >= $grosir['min']) {
+                    if ($grosir) {
                         $data = [
                         
                             'price' => $grosir['price'],
@@ -213,7 +197,7 @@ class Cart extends CI_Controller
                             </script>");
                 }
             } else {
-                if ($qtyupdate >= $grosir['min']) {
+                if ($grosir) {
                     $data = [
                     
                         'price' => $grosir['price'],

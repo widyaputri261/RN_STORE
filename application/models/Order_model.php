@@ -10,7 +10,7 @@ class Order_model extends CI_Model {
 
     public function getCartStock(){
         $id = $this->session->userdata('id');
-        $this->db->where('qty >= stock' );
+        $this->db->where('qty > stock' );
         return $this->db->get_where('cart', ['user' => $id]);
     }
 
